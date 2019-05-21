@@ -89,7 +89,7 @@ Frame::Frame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPo
 	bSizer101->Add( ksztalt, 1, wxEXPAND | wxALL, 5 );
 
 	losuj = new wxButton( this, wxID_ANY, wxT("Losuj"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer101->Add( losuj, 0, wxALIGN_CENTER|wxBOTTOM, 50 );
+	bSizer101->Add( losuj, 0, wxALIGN_CENTER|wxBOTTOM, 100);
 
 
 	bSizer10->Add( bSizer101, 2, wxEXPAND, 5 );

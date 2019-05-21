@@ -71,6 +71,8 @@ void TANGRAMFrame::Draw()
 	dc.Clear();
 	bigTriangle.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
 	square.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
+
+	ksztaltImage.Rescale(ksztalt->GetSize().GetWidth(), ksztalt->GetSize().GetHeight());
 	wxBitmap bitmap(ksztaltImage);
 	wxClientDC dc3(ksztalt);
 	wxBufferedDC dc2(&dc3);

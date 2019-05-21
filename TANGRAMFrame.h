@@ -39,6 +39,7 @@ class TANGRAMFrame : public Frame
 		void DrawFish(wxDC *dc, int w ,int h);
 		void Draw();
 		wxImage ksztaltImage;
+
 protected:
 	Triangle bigTriangle;
 	Square square;
