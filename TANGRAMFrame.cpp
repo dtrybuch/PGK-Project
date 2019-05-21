@@ -7,9 +7,8 @@ Frame( parent ), bigTriangle(250, 250, 125, 140, 2, 150), square(125,150,125,200
 	obrotLewo->SetThumbPosition(0);
 	obrotPrawo->SetRange(360);
 	obrotPrawo->SetThumbPosition(0);
-	wxBitmap bitmap(ksztaltImage);          // Tworzymy tymczasowa bitmape na podstawie Img_Cpy // Pobieramy kontekst okna
-	wxClientDC dc(ksztalt);
-	dc.DrawBitmap(bitmap, 0, 0); // Rysujemy bitmape na kontekscie urzadzenia
+	ksztaltImage.AddHandler(new wxPNGHandler);
+	ksztaltImage.LoadFile("ksztalty/0.png");
 }
 void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 {
@@ -72,7 +71,11 @@ void TANGRAMFrame::Draw()
 	dc.Clear();
 	bigTriangle.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
 	square.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
-
+	wxBitmap bitmap(ksztaltImage);
+	wxClientDC dc3(ksztalt);
+	wxBufferedDC dc2(&dc3);
+	dc2.Clear();
+	dc2.DrawBitmap(bitmap, 0, 0);
 }
 
 void TANGRAMFrame::UpdateUI(wxUpdateUIEvent& event)
