@@ -12,6 +12,7 @@ public:
 
 IMPLEMENT_APP(MyApp);
 
+
 bool MyApp::OnInit() 
 {
  TANGRAMFrame *mainFrame = new TANGRAMFrame(NULL);

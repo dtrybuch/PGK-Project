@@ -8,7 +8,8 @@ Frame( parent ), bigTriangle(250, 250, 125, 140, 2, 150), square(125,150,125,200
 	obrotPrawo->SetRange(360);
 	obrotPrawo->SetThumbPosition(0);
 	ksztaltImage.AddHandler(new wxPNGHandler);
-	ksztaltImage.LoadFile("ksztalty/0.png");
+	srand(time(NULL));
+	losowanie();
 }
 void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 {
@@ -59,7 +60,7 @@ void TANGRAMFrame::cleanButtonClick( wxCommandEvent& event )
 
 void TANGRAMFrame::losujButtonClick( wxCommandEvent& event )
 {
-// TODO: Implement losujButtonClick
+	losowanie();
 }
 
 void TANGRAMFrame::Draw()
@@ -71,13 +72,16 @@ void TANGRAMFrame::Draw()
 	dc.Clear();
 	bigTriangle.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
 	square.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
+	if (ksztaltImage.IsOk())
+	{
+		ksztaltImage.Rescale(ksztalt->GetSize().GetWidth(), ksztalt->GetSize().GetHeight());
+		wxBitmap bitmap(ksztaltImage);
+		wxClientDC dc3(ksztalt);
+		wxBufferedDC dc2(&dc3);
+		dc2.Clear();
+		dc2.DrawBitmap(bitmap, 0, 0);
+	}
 
-	ksztaltImage.Rescale(ksztalt->GetSize().GetWidth(), ksztalt->GetSize().GetHeight());
-	wxBitmap bitmap(ksztaltImage);
-	wxClientDC dc3(ksztalt);
-	wxBufferedDC dc2(&dc3);
-	dc2.Clear();
-	dc2.DrawBitmap(bitmap, 0, 0);
 }
 
 void TANGRAMFrame::UpdateUI(wxUpdateUIEvent& event)
@@ -110,6 +114,30 @@ void TANGRAMFrame::DrawFish(wxDC *dc, int w, int h)
 	dc->SetBrush(*wxGREY_BRUSH);
 	dc->DrawPolygon(9, Points);
 }
-
+void TANGRAMFrame::losowanie()
+{
+	wylosowana = rand() % 21;
+	if (wylosowana == 0) ksztaltImage.LoadFile("ksztalty/0.png");
+	if (wylosowana == 1) ksztaltImage.LoadFile("ksztalty/1.png");
+	if (wylosowana == 2) ksztaltImage.LoadFile("ksztalty/2.png");
+	if (wylosowana == 3) ksztaltImage.LoadFile("ksztalty/3.png");
+	if (wylosowana == 4) ksztaltImage.LoadFile("ksztalty/4.png");
+	if (wylosowana == 5) ksztaltImage.LoadFile("ksztalty/5.png");
+	if (wylosowana == 6) ksztaltImage.LoadFile("ksztalty/6.png");
+	if (wylosowana == 7) ksztaltImage.LoadFile("ksztalty/7.png");
+	if (wylosowana == 8) ksztaltImage.LoadFile("ksztalty/8.png");
+	if (wylosowana == 9) ksztaltImage.LoadFile("ksztalty/9.png");
+	if (wylosowana == 10) ksztaltImage.LoadFile("ksztalty/10.png");
+	if (wylosowana == 11) ksztaltImage.LoadFile("ksztalty/11.png");
+	if (wylosowana == 12) ksztaltImage.LoadFile("ksztalty/12.png");
+	if (wylosowana == 13) ksztaltImage.LoadFile("ksztalty/13.png");
+	if (wylosowana == 14) ksztaltImage.LoadFile("ksztalty/14.png");
+	if (wylosowana == 15) ksztaltImage.LoadFile("ksztalty/15.png");
+	if (wylosowana == 16) ksztaltImage.LoadFile("ksztalty/16.png");
+	if (wylosowana == 17) ksztaltImage.LoadFile("ksztalty/17.png");
+	if (wylosowana == 18) ksztaltImage.LoadFile("ksztalty/18.png");
+	if (wylosowana == 19) ksztaltImage.LoadFile("ksztalty/19.png");
+	if (wylosowana == 20) ksztaltImage.LoadFile("ksztalty/20.png");
+}
 
 
