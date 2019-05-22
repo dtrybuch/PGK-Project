@@ -1,13 +1,24 @@
 #include "TANGRAMFrame.h"
 
-//edited 21.05
+//edited 22.05
 TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
-	Frame(parent),
-	bigTriangle1(250, 250, 125, 140, 2, 150), bigTriangle2(250, 250, 125, 140, 2, 150), middleTriangle(250, 250, 125, 140, 2, 150),
+	Frame(parent)/*, 
+	bigTriangle1(menu->GetSize().GetWidth()/2 - 100, 224, 422, 324, 322, 424), bigTriangle2(250, 250, 125, 140, 2, 150), middleTriangle(250, 250, 125, 140, 2, 150),
 	smallTriangle1(250, 250, 125, 140, 2, 150), smallTriangle2(250, 250, 125, 140, 2, 150),
 	square(125, 150, 125, 200, 175, 200, 175, 150), 
-	parallelogram(150,140,250,140,360,400)
+	parallelogram(150,140,250,140,360,400)*/
 {
+	int wlk_pol = 100; //odleglosc od srodka (wielkosc tangramu)
+	int srodekX = (menu->GetSize().GetWidth() / 2) + 1;
+	int srodekY = (menu->GetSize().GetHeight() / 2) + 1;
+
+	bigTriangle1 = Triangle(srodekX - wlk_pol, srodekY- wlk_pol, srodekX, srodekY, srodekX- wlk_pol, srodekY+ wlk_pol);
+	bigTriangle2 = Triangle(srodekX - wlk_pol, srodekY + wlk_pol, srodekX, srodekY, srodekX+ wlk_pol, srodekY+ wlk_pol);
+	middleTriangle = Triangle(srodekX, srodekY-wlk_pol, srodekX+wlk_pol, srodekY-100 , srodekX+wlk_pol, srodekY);
+	smallTriangle1 = Triangle(srodekX-wlk_pol/2, srodekY - wlk_pol / 2, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX, srodekY);
+	smallTriangle2 = Triangle(srodekX + wlk_pol/2, srodekY+wlk_pol/2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
+	square = Square(srodekX, srodekY,srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol / 2, srodekY + wlk_pol / 2);
+	parallelogram = Parallelogram(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY - wlk_pol, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2);
 	//end editing
 	obrotLewo->SetRange(360);
 	obrotLewo->SetThumbPosition(0);
@@ -76,9 +87,13 @@ void TANGRAMFrame::Draw()
 	int w, h;
 	menu->GetSize(&w, &h);
 	dc.Clear();
+	//edited 22.05
 	bigTriangle1.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
+	bigTriangle2.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
 	square.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
-	//edited 21.05
+	smallTriangle1.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
+	smallTriangle2.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
+	middleTriangle.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
 	parallelogram.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
 	//endediting
 	

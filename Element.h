@@ -5,11 +5,12 @@
 class Matrix;
 
 //edited 21.05
-//konwencja elementow - podajemy wspó³rzêdne od lewego górnego, zgodnie z wskazówkami zegara
+//konwencja elementow - podajemy wspó³rzêdne od najbardziej lewego wierzcho³ka, zgodnie z wskazówkami zegara
 //end editing
 
 class Element{
 public:
+	//metoda rysuj: 
 	virtual void Draw(wxDC *dc, int w, int h, int alfa, int beta) = 0;
 	virtual Matrix LeftRotate(int alfa, int w, int h) = 0;
 	virtual Matrix RightRotate(int beta, int w, int h) = 0;
@@ -26,6 +27,7 @@ protected:
 class Triangle :public Element
 {
 public:
+	Triangle() {}
 	Triangle(int x1, int y1, int x2, int y2, int x3, int y3)
 	{
 		Points[0] = wxPoint(x1,y1);
@@ -46,6 +48,7 @@ protected:
 
 class Square :public Element{
 public:
+	Square() {}
 	Square(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
 	{
 		Points[0] = wxPoint(x1, y1);
@@ -66,14 +69,17 @@ protected:
 };
 
 //edited 22.05
+
+//klasa rownoleglobok
+//czwarty wierzcholek obliczany jest automatycznie na podstawie trzech
+
 class Parallelogram : public Element
 {
 public:
+	Parallelogram() {}
 	Parallelogram(int x1, int y1, int x2, int y2, int x3, int y3) 
 	{
 		int length = x2 - x1;
-		//int width = y3 - y2;
-		//double tangens = (y3 - y2) / (x3 - x2);
 		int x4 = x1 + (x3 - x2);
 		int y4 = y3;
 		Points[0] = wxPoint(x1, y1);
