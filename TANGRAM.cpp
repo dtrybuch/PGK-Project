@@ -106,6 +106,7 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	// Connect Events
 	this->Connect(wxEVT_UPDATE_UI, wxUpdateUIEventHandler(Frame::UpdateUI));
 	menu->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(Frame::MouseClick), NULL, this);
+	menu->Connect(wxEVT_LEFT_UP, wxMouseEventHandler(Frame::MouseUp), NULL, this);
 	menu->Connect(wxEVT_MOTION, wxMouseEventHandler(Frame::MouseMotion), NULL, this);
 	symetria->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::symetriaButtonClick), NULL, this);
 	obrotPrawo->Connect(wxEVT_SCROLL_TOP, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);

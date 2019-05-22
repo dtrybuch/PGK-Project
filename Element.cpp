@@ -75,6 +75,35 @@ void Triangle:: Symetria()
 {
 
 }
+
+bool Triangle::isCursorInShape(wxPoint mousePoints)
+{
+	double alfa = 0;
+	double dlugosc1, dlugosc2, dlugosc3;
+	dlugosc1 = dlugosc(Points[0],mousePoints);
+	dlugosc2 = dlugosc(Points[1],mousePoints);
+	dlugosc3 = dlugosc(Points[2],mousePoints);
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2))/(2*dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc1, 2) - pow(dlugosc31, 2)) / (2 * dlugosc1*dlugosc3));//z twierdzenia o cosinusach
+	if (fabs(360 - alfa * 180/M_PI) < 0.01) return true;
+	return false;
+}
+void Triangle::setSrodek()
+{
+	srodekX = (Points[0].x + Points[1].x + Points[2].x) / 3;
+	srodekY = (Points[0].y + Points[1].y + Points[2].y) / 3;
+}
+
+void Triangle::AddToPoint(int x, int y)
+{
+	Points[0].x += x;
+	Points[0].y += y;
+	Points[1].x += x;
+	Points[1].y += y;
+	Points[2].x += x;
+	Points[2].y += y;
+}
 //////////////////////////////////////////////////////////////////////////////
 void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
@@ -205,3 +234,10 @@ void Parallelogram::Symetria()
 
 }
 //end editing
+
+double dlugosc(wxPoint pierwszy, wxPoint drugi)
+{
+	double tmpX = pierwszy.x - drugi.x;
+	double tmpY = pierwszy.y - drugi.y;
+	return sqrt(tmpX*tmpX + tmpY * tmpY);
+}

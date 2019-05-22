@@ -25,7 +25,8 @@ class TANGRAMFrame : public Frame
 
 protected:
 	// Handlers for Frame events.
-	void MouseClick(wxMouseEvent& event);
+	void MouseClick(wxMouseEvent& event); //22.05
+	void MouseUp(wxMouseEvent& event); //22.05
 	void MouseMotion(wxMouseEvent& event);
 	void symetriaButtonClick(wxCommandEvent& event);
 	void obrotPrawoUpdate(wxScrollEvent& event);
@@ -54,6 +55,7 @@ protected:
 	Triangle smallTriangle2;
 	Square square;
 	Parallelogram parallelogram;
+	wxPoint firstMousePosition;
 	//end editing
 
 };

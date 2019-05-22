@@ -1,23 +1,23 @@
 #include "TANGRAMFrame.h"
 
-//edited 22.05
+//edited 21.05
 TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
-	Frame(parent)/*, 
-	bigTriangle1(menu->GetSize().GetWidth()/2 - 100, 224, 422, 324, 322, 424), bigTriangle2(250, 250, 125, 140, 2, 150), middleTriangle(250, 250, 125, 140, 2, 150),
-	smallTriangle1(250, 250, 125, 140, 2, 150), smallTriangle2(250, 250, 125, 140, 2, 150),
-	square(125, 150, 125, 200, 175, 200, 175, 150), 
-	parallelogram(150,140,250,140,360,400)*/
+	Frame(parent)
+	//,bigTriangle1(250, 250, 125, 140, 2, 150), bigTriangle2(250, 250, 125, 140, 2, 150), middleTriangle(250, 250, 125, 140, 2, 150),
+	//smallTriangle1(250, 250, 125, 140, 2, 150), smallTriangle2(250, 250, 125, 140, 2, 150),
+	//square(125, 150, 125, 200, 175, 200, 175, 150), 
+	//parallelogram(150,140,250,140,360,400)
 {
 	int wlk_pol = 100; //odleglosc od srodka (wielkosc tangramu)
 	int srodekX = (menu->GetSize().GetWidth() / 2) + 1;
 	int srodekY = (menu->GetSize().GetHeight() / 2) + 1;
 
-	bigTriangle1 = Triangle(srodekX - wlk_pol, srodekY- wlk_pol, srodekX, srodekY, srodekX- wlk_pol, srodekY+ wlk_pol);
-	bigTriangle2 = Triangle(srodekX - wlk_pol, srodekY + wlk_pol, srodekX, srodekY, srodekX+ wlk_pol, srodekY+ wlk_pol);
-	middleTriangle = Triangle(srodekX, srodekY-wlk_pol, srodekX+wlk_pol, srodekY-100 , srodekX+wlk_pol, srodekY);
-	smallTriangle1 = Triangle(srodekX-wlk_pol/2, srodekY - wlk_pol / 2, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX, srodekY);
-	smallTriangle2 = Triangle(srodekX + wlk_pol/2, srodekY+wlk_pol/2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
-	square = Square(srodekX, srodekY,srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol / 2, srodekY + wlk_pol / 2);
+	bigTriangle1 = Triangle(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY, srodekX - wlk_pol, srodekY + wlk_pol);
+	bigTriangle2 = Triangle(srodekX - wlk_pol, srodekY + wlk_pol, srodekX, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
+	middleTriangle = Triangle(srodekX, srodekY - wlk_pol, srodekX + wlk_pol, srodekY - 100, srodekX + wlk_pol, srodekY);
+	smallTriangle1 = Triangle(srodekX - wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX, srodekY);
+	smallTriangle2 = Triangle(srodekX + wlk_pol / 2, srodekY + wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
+	square = Square(srodekX, srodekY, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol / 2, srodekY + wlk_pol / 2);
 	parallelogram = Parallelogram(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY - wlk_pol, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2);
 	//end editing
 	obrotLewo->SetRange(360);
@@ -30,15 +30,46 @@ TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 }
 void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 {
-	wxClientDC dc1(menu);
-	wxBufferedDC dc(&dc1);
-	dc.SetBrush(*wxRED);
-	dc.DrawRectangle(20, 20, 150, 300);
+	//edited 22.05
+	firstMousePosition.x = wxGetMousePosition().x - this->GetScreenPosition().x - 14;
+	firstMousePosition.y = wxGetMousePosition().y - this->GetScreenPosition().y - 44;
+
+}
+void TANGRAMFrame::MouseUp(wxMouseEvent& event)
+{
+	firstMousePosition.x = wxGetMousePosition().x - this->GetScreenPosition().x - 14;
+	firstMousePosition.y = wxGetMousePosition().y - this->GetScreenPosition().y - 44;
+	//endediting 22.05
 }
 
 void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 {
-	// TODO: Implement MouseMotion
+	//edited 22.05
+	int wlk_pol = 100; //odleglosc od srodka (wielkosc tangramu)
+	int srodekX = (menu->GetSize().GetWidth() / 2) + 1;
+	int srodekY = (menu->GetSize().GetHeight() / 2) + 1;
+	wxPoint mousePoints{ wxGetMousePosition().x - this->GetScreenPosition().x - 14, wxGetMousePosition().y - this->GetScreenPosition().y - 44 };
+	int mouseX = mousePoints.x - firstMousePosition.x;
+	int mouseY = mousePoints.y - firstMousePosition.y;
+	if (bigTriangle1.isCursorInShape(mousePoints) && wxGetMouseState().LeftDown())
+	{
+		bigTriangle1.SetPoints(srodekX - wlk_pol + mouseX, srodekY - wlk_pol + mouseY, srodekX + mouseX, srodekY + mouseY, srodekX - wlk_pol + mouseX, srodekY + wlk_pol + mouseY);
+		bigTriangle1.setSrodek();
+		bigTriangle1.isClicking = true;
+	}
+	else if (bigTriangle2.isCursorInShape(mousePoints) && wxGetMouseState().LeftDown())
+	{
+		bigTriangle2.SetPoints(srodekX - wlk_pol + mouseX, srodekY + wlk_pol + mouseY, srodekX + mouseX, srodekY + mouseY, srodekX + wlk_pol + mouseX, srodekY + wlk_pol + mouseY);
+		bigTriangle2.setSrodek();
+		bigTriangle2.isClicking = true;
+	}
+	else if (middleTriangle.isCursorInShape(mousePoints) && wxGetMouseState().LeftDown())
+	{
+		middleTriangle.SetPoints(srodekX + mouseX, srodekY - wlk_pol + mouseY, srodekX + wlk_pol + mouseX, srodekY - 100 + mouseY, srodekX + wlk_pol + mouseX, srodekY + mouseY);
+		middleTriangle.setSrodek();
+		middleTriangle.isClicking = true;
+	}
+	//end editing 22.05
 }
 
 void TANGRAMFrame::symetriaButtonClick(wxCommandEvent& event)
@@ -96,7 +127,7 @@ void TANGRAMFrame::Draw()
 	middleTriangle.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
 	parallelogram.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
 	//endediting
-	
+
 	if (ksztaltImage.IsOk())
 	{
 		ksztaltImage.Rescale(ksztalt->GetSize().GetWidth(), ksztalt->GetSize().GetHeight());

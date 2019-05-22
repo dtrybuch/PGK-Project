@@ -55,6 +55,7 @@ class Frame : public wxFrame
 
 		// Virtual event handlers, overide them in your derived class
 		virtual void MouseClick( wxMouseEvent& event ) { event.Skip(); }
+		virtual void MouseUp(wxMouseEvent& event) { event.Skip(); }
 		virtual void MouseMotion( wxMouseEvent& event ) { event.Skip(); }
 		virtual void symetriaButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void obrotPrawoUpdate( wxScrollEvent& event ) { event.Skip(); }
