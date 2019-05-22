@@ -1,8 +1,14 @@
 #include "TANGRAMFrame.h"
-TANGRAMFrame::TANGRAMFrame( wxWindow* parent ) 
-: 
-Frame( parent ), bigTriangle(250, 250, 125, 140, 2, 150), square(125,150,125,200,175,200,175,150)
+
+//edited 21.05
+TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
+	Frame(parent),
+	bigTriangle1(250, 250, 125, 140, 2, 150), bigTriangle2(250, 250, 125, 140, 2, 150), middleTriangle(250, 250, 125, 140, 2, 150),
+	smallTriangle1(250, 250, 125, 140, 2, 150), smallTriangle2(250, 250, 125, 140, 2, 150),
+	square(125, 150, 125, 200, 175, 200, 175, 150), 
+	parallelogram(150,140,250,140,360,400)
 {
+	//end editing
 	obrotLewo->SetRange(360);
 	obrotLewo->SetThumbPosition(0);
 	obrotPrawo->SetRange(360);
@@ -38,19 +44,19 @@ void TANGRAMFrame::KeyEvent(wxKeyEvent& event)
 
 
 
-void TANGRAMFrame::obrotPrawoUpdate( wxScrollEvent& event )
+void TANGRAMFrame::obrotPrawoUpdate(wxScrollEvent& event)
 {
 	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 	Draw();
 }
 
-void TANGRAMFrame::obrotLewoUpdate( wxScrollEvent& event )
+void TANGRAMFrame::obrotLewoUpdate(wxScrollEvent& event)
 {
 	staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 	Draw();
 }
 
-void TANGRAMFrame::cleanButtonClick( wxCommandEvent& event )
+void TANGRAMFrame::cleanButtonClick(wxCommandEvent& event)
 {
 	wxClientDC dc1(menu);
 	wxBufferedDC dc(&dc1);
@@ -58,7 +64,7 @@ void TANGRAMFrame::cleanButtonClick( wxCommandEvent& event )
 	Draw();
 }
 
-void TANGRAMFrame::losujButtonClick( wxCommandEvent& event )
+void TANGRAMFrame::losujButtonClick(wxCommandEvent& event)
 {
 	losowanie();
 }
@@ -70,8 +76,12 @@ void TANGRAMFrame::Draw()
 	int w, h;
 	menu->GetSize(&w, &h);
 	dc.Clear();
-	bigTriangle.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
-	square.Draw(&dc, w, h, obrotLewo->GetThumbPosition(),obrotPrawo->GetThumbPosition());
+	bigTriangle1.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
+	square.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
+	//edited 21.05
+	parallelogram.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
+	//endediting
+	
 	if (ksztaltImage.IsOk())
 	{
 		ksztaltImage.Rescale(ksztalt->GetSize().GetWidth(), ksztalt->GetSize().GetHeight());
@@ -92,11 +102,11 @@ void TANGRAMFrame::UpdateUI(wxUpdateUIEvent& event)
 void TANGRAMFrame::DrawFish(wxDC *dc, int w, int h)
 {
 	wxPoint Points[9];
-	Points[0].x = w/2 - 100;
+	Points[0].x = w / 2 - 100;
 	Points[0].y = h / 2 - 10;
-	Points[1].x = w/2 - 100;
-	Points[1].y = h / 2 +10;
-	Points[2].x = w/2-20;
+	Points[1].x = w / 2 - 100;
+	Points[1].y = h / 2 + 10;
+	Points[2].x = w / 2 - 20;
 	Points[2].y = h / 2 + 40;
 	Points[3].x = w / 2;
 	Points[3].y = h / 2 + 10;
@@ -107,7 +117,7 @@ void TANGRAMFrame::DrawFish(wxDC *dc, int w, int h)
 	Points[6].x = w / 2 + 30;
 	Points[6].y = h / 2 - 10;
 	Points[7].x = w / 2 + 20;
-	Points[7].y = h / 2 ;
+	Points[7].y = h / 2;
 	Points[8].x = w / 2 - 20;
 	Points[8].y = h / 2 - 40;
 	dc->Clear();
@@ -139,5 +149,3 @@ void TANGRAMFrame::losowanie()
 	if (wylosowana == 19) ksztaltImage.LoadFile("ksztalty/19.png");
 	if (wylosowana == 20) ksztaltImage.LoadFile("ksztalty/20.png");
 }
-
-

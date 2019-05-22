@@ -135,5 +135,73 @@ Matrix Square::RightRotate(int beta, int w, int h)
 
 void Square::Symetria()
 {
+	
 
 }
+
+//edited 21.05
+void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
+{
+	Matrix transformation;
+
+	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
+	Vector first;
+	first.Set(Points[0].x, Points[0].y);
+	first = transformation * first;
+	Vector second;
+	second.Set(Points[1].x, Points[1].y);
+	second = transformation * second;
+	Vector third;
+	third.Set(Points[2].x, Points[2].y);
+	third = transformation * third;
+	Vector fourth;
+	fourth.Set(Points[3].x, Points[3].y);
+	fourth = transformation * fourth;
+	wxPoint newPoints[4];
+	newPoints[0].x = first.GetX();
+	newPoints[0].y = first.GetY();
+	newPoints[1].x = second.GetX();
+	newPoints[1].y = second.GetY();
+	newPoints[2].x = third.GetX();
+	newPoints[2].y = third.GetY();
+	newPoints[3].x = fourth.GetX();
+	newPoints[3].y = fourth.GetY();
+
+	dc->SetBrush(*wxGREY_BRUSH);
+	dc->DrawPolygon(4, newPoints);
+
+}
+void Parallelogram::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+{
+	Points[0] = wxPoint(x1, y1);
+	Points[1] = wxPoint(x2, y2);
+	Points[2] = wxPoint(x3, y3);
+	Points[3] = wxPoint(x4, y4);
+
+}
+Matrix Parallelogram::LeftRotate(int alfa, int w, int h)
+{
+	Matrix rotate;
+	rotate.data[0][0] = cos(-alfa * M_PI / 180.0);
+	rotate.data[1][1] = cos(-alfa * M_PI / 180.0);
+	rotate.data[0][1] = -sin(-alfa * M_PI / 180.0);
+	rotate.data[1][0] = sin(-alfa * M_PI / 180.0);
+	return rotate;
+
+}
+Matrix Parallelogram::RightRotate(int beta, int w, int h)
+{
+	Matrix rotate;
+	rotate.data[0][0] = cos(beta* M_PI / 180.0);
+	rotate.data[1][1] = cos(beta* M_PI / 180.0);
+	rotate.data[0][1] = -sin(beta* M_PI / 180.0);
+	rotate.data[1][0] = sin(beta* M_PI / 180.0);
+
+	return rotate;
+
+}
+void Parallelogram::Symetria()
+{
+
+}
+//end editing
