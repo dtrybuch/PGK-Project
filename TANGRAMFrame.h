@@ -45,6 +45,7 @@ public:
 	void Draw();
 	wxImage ksztaltImage;
 	int wylosowana;
+	Element * which;//ktory element jest nacisniety
 protected:
 
 	//edited 21.05

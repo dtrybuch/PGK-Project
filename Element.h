@@ -67,19 +67,27 @@ public:
 		Points[1] = wxPoint(x2, y2);
 		Points[2] = wxPoint(x3, y3);
 		Points[3] = wxPoint(x4, y4);
-		srodekX = (Points[0].x + Points[2].x)  / 2;//w zaleznosci ktory punkt w jakiej kolejnosci
-		srodekY = (Points[0].y + Points[1].y)  / 2;//jak wyzej
+		srodekX = (Points[0].x + Points[2].x)  / 2;
+		srodekY = (Points[0].y + Points[1].y)  / 2;
+		dlugosc12 = dlugosc(Points[0], Points[1]);
+		dlugosc23 = dlugosc(Points[1], Points[2]);
+		dlugosc34 = dlugosc(Points[2], Points[3]);
+		dlugosc41 = dlugosc(Points[0], Points[3]);
 	}
 	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4);
 	Matrix LeftRotate(int alfa, int w, int h);
 	Matrix RightRotate(int beta, int w, int h);
-	bool isCursorInShape(wxPoint mousePoints) { return false; }
+	bool isCursorInShape(wxPoint mousePoints);
 	void Symetria();
-	void setSrodek(){}
-	void AddToPoint(int x, int y){}
+	void setSrodek();
+	void AddToPoint(int x, int y);
 protected:
 	wxPoint Points[4];
+	double dlugosc12;
+	double dlugosc23;
+	double dlugosc34;
+	double dlugosc41;
 
 };
 
@@ -102,19 +110,26 @@ public:
 
 		srodekX = (x3 + x1) / 2;
 		srodekY = (y4 + y2) / 2;
+		dlugosc12 = dlugosc(Points[0], Points[1]);
+		dlugosc23 = dlugosc(Points[1], Points[2]);
+		dlugosc34 = dlugosc(Points[2], Points[3]);
+		dlugosc41 = dlugosc(Points[0], Points[3]);
 	}
 
 	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4);
 	Matrix LeftRotate(int alfa, int w, int h);
 	Matrix RightRotate(int beta, int w, int h);
-	bool isCursorInShape(wxPoint mousePoints) { return false; }
+	bool isCursorInShape(wxPoint mousePoints);
 	void Symetria();
-	void setSrodek(){}
-	void AddToPoint(int x, int y){}
+	void setSrodek();
+	void AddToPoint(int x, int y);
 protected:
 	wxPoint Points[4];
-
+	double dlugosc12;
+	double dlugosc23;
+	double dlugosc34;
+	double dlugosc41;
 };
 //end editing
 

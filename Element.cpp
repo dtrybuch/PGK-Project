@@ -167,7 +167,37 @@ void Square::Symetria()
 	
 
 }
-
+bool Square::isCursorInShape(wxPoint mousePoints)
+{
+	double alfa = 0;
+	double dlugosc1, dlugosc2, dlugosc3,dlugosc4;
+	dlugosc1 = dlugosc(Points[0], mousePoints);
+	dlugosc2 = dlugosc(Points[1], mousePoints);
+	dlugosc3 = dlugosc(Points[2], mousePoints);
+	dlugosc4 = dlugosc(Points[3], mousePoints);
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2 * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugosc34, 2)) / (2 * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugosc41, 2)) / (2 * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
+	if (fabs(360 - alfa * 180 / M_PI) < 0.01) return true;
+	return false;
+}
+void Square::setSrodek()
+{
+	srodekX = (Points[0].x + Points[2].x) / 2;
+	srodekY = (Points[0].y + Points[1].y) / 2;
+}
+void Square::AddToPoint(int x, int y)
+{
+	Points[0].x += x;
+	Points[0].y += y;
+	Points[1].x += x;
+	Points[1].y += y;
+	Points[2].x += x;
+	Points[2].y += y;
+	Points[3].x += x;
+	Points[3].y += y;
+}
 //edited 21.05
 void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
@@ -234,7 +264,37 @@ void Parallelogram::Symetria()
 
 }
 //end editing
-
+bool Parallelogram::isCursorInShape(wxPoint mousePoints)
+{
+	double alfa = 0;
+	double dlugosc1, dlugosc2, dlugosc3, dlugosc4;
+	dlugosc1 = dlugosc(Points[0], mousePoints);
+	dlugosc2 = dlugosc(Points[1], mousePoints);
+	dlugosc3 = dlugosc(Points[2], mousePoints);
+	dlugosc4 = dlugosc(Points[3], mousePoints);
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2 * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugosc34, 2)) / (2 * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugosc41, 2)) / (2 * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
+	if (fabs(360 - alfa * 180 / M_PI) < 0.01) return true;
+	return false;
+}
+void Parallelogram::setSrodek()
+{
+	srodekX = (Points[2].x + Points[0].x) / 2;
+	srodekY = (Points[3].y + Points[1].y) / 2;
+}
+void Parallelogram::AddToPoint(int x, int y)
+{
+	Points[0].x += x;
+	Points[0].y += y;
+	Points[1].x += x;
+	Points[1].y += y;
+	Points[2].x += x;
+	Points[2].y += y;
+	Points[3].x += x;
+	Points[3].y += y;
+}
 double dlugosc(wxPoint pierwszy, wxPoint drugi)
 {
 	double tmpX = pierwszy.x - drugi.x;
