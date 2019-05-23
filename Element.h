@@ -24,6 +24,7 @@ public:
 	bool isClicking = false;
 	int srodekX;
 	int srodekY;
+	int m_alfa = 0, m_beta = 0;//katy przechowywane tymczasowo
 protected:
 };
 

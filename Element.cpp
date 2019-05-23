@@ -23,7 +23,8 @@ Matrix Element::Set_Translate()
 void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-	
+	m_alfa = alfa;
+	m_beta = beta;
 	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa,w,h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
@@ -41,8 +42,10 @@ void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 	newPoints[1].y = second.GetY();
 	newPoints[2].x = third.GetX();
 	newPoints[2].y = third.GetY();
+	if (isClicking) dc->SetPen(*wxYELLOW);
 	dc->SetBrush(*wxGREY_BRUSH);
 	dc->DrawPolygon(3,newPoints);
+	dc->SetPen(*wxBLACK);
 }
 void Triangle::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3)
 {
@@ -108,7 +111,8 @@ void Triangle::AddToPoint(int x, int y)
 void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-
+	m_alfa = alfa;
+	m_beta = beta;
 	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
@@ -132,8 +136,10 @@ void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 	newPoints[3].x = fourth.GetX();
 	newPoints[3].y = fourth.GetY();
 
+	if (isClicking) dc->SetPen(*wxYELLOW);
 	dc->SetBrush(*wxGREY_BRUSH);
 	dc->DrawPolygon(4, newPoints);
+	dc->SetPen(*wxBLACK);
 }
 void Square::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
 {
@@ -202,7 +208,8 @@ void Square::AddToPoint(int x, int y)
 void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-
+	m_alfa = alfa;
+	m_beta = beta;
 	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
@@ -226,8 +233,10 @@ void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 	newPoints[3].x = fourth.GetX();
 	newPoints[3].y = fourth.GetY();
 
+	if (isClicking) dc->SetPen(*wxYELLOW);
 	dc->SetBrush(*wxGREY_BRUSH);
 	dc->DrawPolygon(4, newPoints);
+	dc->SetPen(*wxBLACK);
 
 }
 void Parallelogram::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
