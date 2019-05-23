@@ -68,8 +68,8 @@ public:
 		Points[1] = wxPoint(x2, y2);
 		Points[2] = wxPoint(x3, y3);
 		Points[3] = wxPoint(x4, y4);
-		srodekX = (Points[0].x + Points[2].x)  / 2;
-		srodekY = (Points[0].y + Points[1].y)  / 2;
+		srodekX = (Points[2].x + Points[3].x)  / 2;
+		srodekY = (Points[0].y + Points[3].y)  / 2;
 		dlugosc12 = dlugosc(Points[0], Points[1]);
 		dlugosc23 = dlugosc(Points[1], Points[2]);
 		dlugosc34 = dlugosc(Points[2], Points[3]);

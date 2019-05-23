@@ -25,7 +25,7 @@ void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 	Matrix transformation;
 	m_alfa = alfa;
 	m_beta = beta;
-	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa,w,h)*Set_ReturnTranslate();
+	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa,w,h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -113,7 +113,7 @@ void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 	Matrix transformation;
 	m_alfa = alfa;
 	m_beta = beta;
-	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
+	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -190,8 +190,8 @@ bool Square::isCursorInShape(wxPoint mousePoints)
 }
 void Square::setSrodek()
 {
-	srodekX = (Points[0].x + Points[2].x) / 2;
-	srodekY = (Points[0].y + Points[1].y) / 2;
+	srodekX = (Points[2].x + Points[3].x) / 2;
+	srodekY = (Points[0].y + Points[3].y) / 2;
 }
 void Square::AddToPoint(int x, int y)
 {
@@ -210,7 +210,7 @@ void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 	Matrix transformation;
 	m_alfa = alfa;
 	m_beta = beta;
-	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
+	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;

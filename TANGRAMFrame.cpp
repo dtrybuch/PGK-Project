@@ -31,18 +31,23 @@ TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 }
 void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 {
-	//edited 22.05
+	//edited 23.05
 	firstMousePosition.x = wxGetMousePosition().x - this->GetScreenPosition().x - 14;
 	firstMousePosition.y = wxGetMousePosition().y - this->GetScreenPosition().y - 44;
 }
 void TANGRAMFrame::MouseUp(wxMouseEvent& event)
 {
 	which->isClicking = false;
+	obrotLewo->SetThumbPosition(0);
+	obrotPrawo->SetThumbPosition(0);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+	staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+	//endediting 23.05
 }
 
 void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 {
-	//edited 22.05
+	//edited 23.05
 	int wlk_pol = 100; //odleglosc od srodka (wielkosc tangramu)
 	int srodekX = (menu->GetSize().GetWidth() / 2) + 1;
 	int srodekY = (menu->GetSize().GetHeight() / 2) + 1;
@@ -107,7 +112,7 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 		parallelogram.isClicking = true;	
 		which = &parallelogram;
 	}
-	//end editing 22.05
+	//end editing 23.05
 }
 
 void TANGRAMFrame::symetriaButtonClick(wxCommandEvent& event)
@@ -158,7 +163,7 @@ void TANGRAMFrame::Draw()
 	dc.Clear();
 	if (obrotLewo->GetThumbPosition() == 359) obrotLewo->SetThumbPosition(0);
 	if (obrotPrawo->GetThumbPosition() == 359) obrotPrawo->SetThumbPosition(0);
-	//edited 22.05
+	//edited 23.05
 	if(bigTriangle1.isClicking) bigTriangle1.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
 	else bigTriangle1.Draw(&dc, w, h, bigTriangle1.m_alfa, bigTriangle1.m_beta);
 	if(bigTriangle2.isClicking) bigTriangle2.Draw(&dc, w, h, obrotLewo->GetThumbPosition(), obrotPrawo->GetThumbPosition());
