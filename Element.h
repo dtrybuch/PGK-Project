@@ -55,6 +55,7 @@ public:
 	void SetNewPoints(); //27.05 dod
 protected:
 	wxPoint Points[3];
+	wxPoint tmpPoints[3];//przechowywane punkty po transformacji 27.05 dla wszystkich
 	bool rotated; //czy jest odwrocony bokiem bo sa dwa
 	double dlugosc12;
 	double dlugosc23;
@@ -87,6 +88,7 @@ public:
 	void SetNewPoints() {} //27.05
 protected:
 	wxPoint Points[4];
+	wxPoint tmpPoints[4];
 	double dlugosc12;
 	double dlugosc23;
 	double dlugosc34;
@@ -128,6 +130,7 @@ public:
 	void SetNewPoints() {} //27.05
 protected:
 	wxPoint Points[4];
+	wxPoint tmpPoints[4];
 	double dlugosc12;
 	double dlugosc23;
 	double dlugosc34;
