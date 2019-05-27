@@ -19,8 +19,10 @@ public:
 	virtual void Symetria() = 0;
 	virtual void setSrodek() = 0;//22.05 dodatkowa funkcja ustwiajaca srodek 
 	virtual void AddToPoint(int x, int y) = 0;
+	virtual void SetNewPoints() = 0; //27.05 zamienia punkty w zaleznosci od alfy i bety
 	Matrix Set_Translate() ;
 	Matrix 	Set_ReturnTranslate() ;
+	bool isMoving = false;
 	bool isClicking = false;
 	int srodekX;
 	int srodekY;
@@ -37,8 +39,7 @@ public:
 		Points[0] = wxPoint(x1,y1);
 		Points[1] = wxPoint(x2,y2);
 		Points[2] = wxPoint(x3,y3);
-		srodekX = (Points[0].x + Points[1].x + Points[2].x) / 3;
-		srodekY = (Points[0].y + Points[1].y + Points[2].y) / 3;
+		setSrodek();
 		dlugosc12 = dlugosc(Points[0], Points[1]);
 		dlugosc23 = dlugosc(Points[1], Points[2]);
 		dlugosc31 = dlugosc(Points[0], Points[2]);
@@ -51,6 +52,7 @@ public:
 	bool isCursorInShape(wxPoint mousePoints);//22.05
 	void setSrodek();//22.05
 	void AddToPoint(int x, int y);//22.05
+	void SetNewPoints(); //27.05 dod
 protected:
 	wxPoint Points[3];
 	bool rotated; //czy jest odwrocony bokiem bo sa dwa
@@ -68,8 +70,7 @@ public:
 		Points[1] = wxPoint(x2, y2);
 		Points[2] = wxPoint(x3, y3);
 		Points[3] = wxPoint(x4, y4);
-		srodekX = (Points[2].x + Points[3].x)  / 2;
-		srodekY = (Points[0].y + Points[3].y)  / 2;
+		setSrodek();
 		dlugosc12 = dlugosc(Points[0], Points[1]);
 		dlugosc23 = dlugosc(Points[1], Points[2]);
 		dlugosc34 = dlugosc(Points[2], Points[3]);
@@ -83,6 +84,7 @@ public:
 	void Symetria();
 	void setSrodek();
 	void AddToPoint(int x, int y);
+	void SetNewPoints() {} //27.05
 protected:
 	wxPoint Points[4];
 	double dlugosc12;
@@ -108,9 +110,7 @@ public:
 		Points[1] = wxPoint(x2, y2);
 		Points[2] = wxPoint(x3, y3);
 		Points[3] = wxPoint(x4, y4);
-
-		srodekX = (x3 + x1) / 2;
-		srodekY = (y4 + y2) / 2;
+		setSrodek();
 		dlugosc12 = dlugosc(Points[0], Points[1]);
 		dlugosc23 = dlugosc(Points[1], Points[2]);
 		dlugosc34 = dlugosc(Points[2], Points[3]);
@@ -125,6 +125,7 @@ public:
 	void Symetria();
 	void setSrodek();
 	void AddToPoint(int x, int y);
+	void SetNewPoints() {} //27.05
 protected:
 	wxPoint Points[4];
 	double dlugosc12;

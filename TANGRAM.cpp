@@ -118,7 +118,7 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	obrotPrawo->Connect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Connect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Connect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
-	obrotLewo->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(Frame::KeyEvent), NULL, this);
+	obrotLewo->Connect(wxEVT_CHAR, wxKeyEventHandler(Frame::KeyEvent), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_TOP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_BOTTOM, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_LINEUP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
@@ -148,7 +148,7 @@ Frame::~Frame()
 	obrotPrawo->Disconnect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Disconnect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Disconnect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
-	obrotLewo->Disconnect(wxEVT_KEY_DOWN, wxKeyEventHandler(Frame::KeyEvent), NULL, this);
+	obrotLewo->Disconnect(wxEVT_CHAR, wxKeyEventHandler(Frame::KeyEvent), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_TOP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_BOTTOM, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_LINEUP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);

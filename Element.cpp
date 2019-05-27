@@ -23,9 +23,7 @@ Matrix Element::Set_Translate()
 void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-	m_alfa = alfa;
-	m_beta = beta;
-	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa,w,h)*Set_ReturnTranslate();
+	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa,w,h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -86,10 +84,10 @@ bool Triangle::isCursorInShape(wxPoint mousePoints)
 	dlugosc1 = dlugosc(Points[0],mousePoints);
 	dlugosc2 = dlugosc(Points[1],mousePoints);
 	dlugosc3 = dlugosc(Points[2],mousePoints);
-	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2))/(2*dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2*dlugosc1*dlugosc2));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc1, 2) - pow(dlugosc31, 2)) / (2 * dlugosc1*dlugosc3));//z twierdzenia o cosinusach
-	if (fabs(360 - alfa * 180/M_PI) < 0.01) return true;
+	if (fabs(360 - alfa * 180/M_PI) < 0.0001) return true;
 	return false;
 }
 void Triangle::setSrodek()
@@ -107,13 +105,33 @@ void Triangle::AddToPoint(int x, int y)
 	Points[2].x += x;
 	Points[2].y += y;
 }
+void Triangle::SetNewPoints()
+{
+	int w = 0; int h = 0;
+	Matrix transformation;
+	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa, w, h)*Set_ReturnTranslate();
+	Vector first;
+	first.Set(Points[0].x, Points[0].y);
+	first = transformation * first;
+	Vector second;
+	second.Set(Points[1].x, Points[1].y);
+	second = transformation * second;
+	Vector third;
+	third.Set(Points[2].x, Points[2].y);
+	third = transformation * third;
+	Points[0].x = first.GetX();
+	Points[0].y = first.GetY();
+	Points[1].x = second.GetX();
+	Points[1].y = second.GetY();
+	Points[2].x = third.GetX();
+	Points[2].y = third.GetY();
+
+}
 //////////////////////////////////////////////////////////////////////////////
 void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-	m_alfa = alfa;
-	m_beta = beta;
-	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa, w, h)*Set_ReturnTranslate();
+	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -135,7 +153,6 @@ void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 	newPoints[2].y = third.GetY();
 	newPoints[3].x = fourth.GetX();
 	newPoints[3].y = fourth.GetY();
-
 	if (isClicking) dc->SetPen(*wxYELLOW);
 	dc->SetBrush(*wxGREY_BRUSH);
 	dc->DrawPolygon(4, newPoints);
@@ -181,17 +198,17 @@ bool Square::isCursorInShape(wxPoint mousePoints)
 	dlugosc2 = dlugosc(Points[1], mousePoints);
 	dlugosc3 = dlugosc(Points[2], mousePoints);
 	dlugosc4 = dlugosc(Points[3], mousePoints);
-	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2 * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugosc34, 2)) / (2 * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugosc41, 2)) / (2 * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
-	if (fabs(360 - alfa * 180 / M_PI) < 0.01) return true;
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2. * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2. * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugosc34, 2)) / (2. * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugosc41, 2)) / (2. * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
+	if (fabs(360 - alfa * 180 / M_PI) < 0.0001) return true;
 	return false;
 }
 void Square::setSrodek()
 {
-	srodekX = (Points[2].x + Points[3].x) / 2;
-	srodekY = (Points[0].y + Points[3].y) / 2;
+	srodekX = (Points[2].x + Points[0].x) / 2;
+	srodekY = (Points[3].y + Points[1].y) / 2;
 }
 void Square::AddToPoint(int x, int y)
 {
@@ -208,9 +225,7 @@ void Square::AddToPoint(int x, int y)
 void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-	m_alfa = alfa;
-	m_beta = beta;
-	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa, w, h)*Set_ReturnTranslate();
+	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -285,7 +300,7 @@ bool Parallelogram::isCursorInShape(wxPoint mousePoints)
 	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugosc34, 2)) / (2 * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugosc41, 2)) / (2 * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
-	if (fabs(360 - alfa * 180 / M_PI) < 0.01) return true;
+	if (fabs(360 - alfa * 180 / M_PI) < 0.0001) return true;
 	return false;
 }
 void Parallelogram::setSrodek()
