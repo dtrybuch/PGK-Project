@@ -31,9 +31,10 @@ TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 }
 void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 {
-	//edited 23.05
+	
 	firstMousePosition.x = wxGetMousePosition().x - this->GetScreenPosition().x - 14;
 	firstMousePosition.y = wxGetMousePosition().y - this->GetScreenPosition().y - 44;
+	//edited 27.05
 	wxPoint mousePoints{ wxGetMousePosition().x - this->GetScreenPosition().x - 14, wxGetMousePosition().y - this->GetScreenPosition().y - 44 };
 	if (bigTriangle1.isCursorInShape(mousePoints))
 	{
@@ -77,6 +78,7 @@ void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 		which = &parallelogram;
 		which->isClicking = true;
 	}
+	//endediting 27.05
 	Draw();
 	
 }
