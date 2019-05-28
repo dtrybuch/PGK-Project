@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////////////
 // C++ code generated with wxFormBuilder (version Oct 26 2018)
 // http://www.wxformbuilder.org/
 //
@@ -92,6 +92,43 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	bSizer101->Add(losuj, 0, wxALIGN_CENTER | wxBOTTOM, 100);
 
 
+	wxBoxSizer* bSizer92;
+	bSizer92 = new wxBoxSizer(wxVERTICAL);
+
+	wybierzKat = new wxStaticText(this, wxID_ANY, wxT("Wybierz kąt:"), wxDefaultPosition, wxDefaultSize, 0);
+	wybierzKat->Wrap(-1);
+	bSizer92->Add(wybierzKat, 0, wxALL, 5);
+
+
+	bSizer101->Add(bSizer92, 0, wxALIGN_CENTER, 5);
+
+	wxBoxSizer* bSizer6;
+	bSizer6 = new wxBoxSizer(wxHORIZONTAL);
+
+	stopnie45 = new wxRadioButton(this, wxID_ANY, wxT("45"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer6->Add(stopnie45, 0, wxBOTTOM, 10);
+
+	stopnie90 = new wxRadioButton(this, wxID_ANY, wxT("90"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer6->Add(stopnie90, 0, wxBOTTOM, 10);
+
+	stopnie135 = new wxRadioButton(this, wxID_ANY, wxT("135"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer6->Add(stopnie135, 3, wxBOTTOM, 10);
+
+	stopnie180 = new wxRadioButton(this, wxID_ANY, wxT("180"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer6->Add(stopnie180, 0, wxBOTTOM, 10);
+
+	stopnie235 = new wxRadioButton(this, wxID_ANY, wxT("235"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer6->Add(stopnie235, 0, wxBOTTOM, 10);
+
+	stopnie270 = new wxRadioButton(this, wxID_ANY, wxT("270"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer6->Add(stopnie270, 0, wxBOTTOM, 10);
+
+	stopnie315 = new wxRadioButton(this, wxID_ANY, wxT("315"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer6->Add(stopnie315, 0, wxBOTTOM, 10);
+
+
+	bSizer101->Add(bSizer6, 0, wxALIGN_BOTTOM, 30);
+
 	bSizer10->Add(bSizer101, 2, wxEXPAND, 5);
 
 
@@ -130,6 +167,13 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	obrotLewo->Connect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	clean->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::cleanButtonClick), NULL, this);
 	losuj->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::losujButtonClick), NULL, this);
+	stopnie45->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie45Button), NULL, this);
+	stopnie90->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie90Button), NULL, this);
+	stopnie135->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie135Button), NULL, this);
+	stopnie180->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie180Button), NULL, this);
+	stopnie235->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie235Button), NULL, this);
+	stopnie270->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie270Button), NULL, this);
+	stopnie315->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie315Button), NULL, this);
 }
 
 Frame::~Frame()
@@ -160,5 +204,11 @@ Frame::~Frame()
 	obrotLewo->Disconnect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	clean->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::cleanButtonClick), NULL, this);
 	losuj->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::losujButtonClick), NULL, this);
-
+	stopnie45->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie45Button), NULL, this);
+	stopnie90->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie90Button), NULL, this);
+	stopnie135->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie135Button), NULL, this);
+	stopnie180->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie180Button), NULL, this);
+	stopnie235->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie235Button), NULL, this);
+	stopnie270->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie270Button), NULL, this);
+	stopnie315->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie315Button), NULL, this);
 }

@@ -36,6 +36,13 @@ protected:
 	void losujButtonClick(wxCommandEvent& event);
 	void UpdateUI(wxUpdateUIEvent& event);
 	void losowanie();
+	void stopnie45Button(wxCommandEvent& event);
+	void stopnie90Button(wxCommandEvent& event);
+	void stopnie135Button(wxCommandEvent& event);
+	void stopnie180Button(wxCommandEvent& event);
+	void stopnie235Button(wxCommandEvent& event);
+	void stopnie270Button(wxCommandEvent& event);
+	void stopnie315Button(wxCommandEvent& event);
 public:
 	/** Constructor */
 	TANGRAMFrame(wxWindow* parent);

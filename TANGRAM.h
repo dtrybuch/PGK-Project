@@ -24,7 +24,7 @@
 #include <wx/sizer.h>
 #include <wx/scrolbar.h>
 #include <wx/frame.h>
-
+#include <wx/radiobut.h>
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -52,7 +52,14 @@ class Frame : public wxFrame
 		wxStaticText* instrukcja5;
 		wxPanel* ksztalt;
 		wxButton* losuj;
-
+		wxStaticText* wybierzKat;
+		wxRadioButton* stopnie45;
+		wxRadioButton* stopnie90;
+		wxRadioButton* stopnie135;
+		wxRadioButton* stopnie180;
+		wxRadioButton* stopnie235;
+		wxRadioButton* stopnie270;
+		wxRadioButton* stopnie315;
 		// Virtual event handlers, overide them in your derived class
 		virtual void MouseClick( wxMouseEvent& event ) { event.Skip(); }
 		virtual void MouseUp(wxMouseEvent& event) { event.Skip(); }
@@ -64,7 +71,13 @@ class Frame : public wxFrame
 		virtual void cleanButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void losujButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void UpdateUI(wxUpdateUIEvent& event) { event.Skip(); }
-
+		virtual void stopnie45Button(wxCommandEvent& event) { event.Skip(); }
+		virtual void stopnie90Button(wxCommandEvent& event) { event.Skip(); }
+		virtual void stopnie135Button(wxCommandEvent& event) { event.Skip(); }
+		virtual void stopnie180Button(wxCommandEvent& event) { event.Skip(); }
+		virtual void stopnie235Button(wxCommandEvent& event) { event.Skip(); }
+		virtual void stopnie270Button(wxCommandEvent& event) { event.Skip(); }
+		virtual void stopnie315Button(wxCommandEvent& event) { event.Skip(); }
 
 	public:
 

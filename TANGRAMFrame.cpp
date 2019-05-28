@@ -244,6 +244,7 @@ void TANGRAMFrame::symetriaButtonClick(wxCommandEvent& event)
 }
 
 
+
 void TANGRAMFrame::KeyEvent(wxKeyEvent& event)
 {
 	char key = event.GetKeyCode();
@@ -370,4 +371,39 @@ void TANGRAMFrame::losowanie()
 	if (wylosowana == 18) ksztaltImage.LoadFile("ksztalty/18.png");
 	if (wylosowana == 19) ksztaltImage.LoadFile("ksztalty/19.png");
 	if (wylosowana == 20) ksztaltImage.LoadFile("ksztalty/20.png");
+}
+
+void TANGRAMFrame::stopnie45Button(wxCommandEvent& event)
+{
+	// TODO: Implement stopnie45Button
+}
+
+void TANGRAMFrame::stopnie90Button(wxCommandEvent& event)
+{
+	// TODO: Implement stopnie90Button
+}
+
+void TANGRAMFrame::stopnie135Button(wxCommandEvent& event)
+{
+	// TODO: Implement stopnie135Button
+}
+
+void TANGRAMFrame::stopnie180Button(wxCommandEvent& event)
+{
+	// TODO: Implement stopnie180Button
+}
+
+void TANGRAMFrame::stopnie235Button(wxCommandEvent& event)
+{
+	// TODO: Implement stopnie235Button
+}
+
+void TANGRAMFrame::stopnie270Button(wxCommandEvent& event)
+{
+	// TODO: Implement stopnie270Button
+}
+
+void TANGRAMFrame::stopnie315Button(wxCommandEvent& event)
+{
+	// TODO: Implement stopnie315Button
 }
