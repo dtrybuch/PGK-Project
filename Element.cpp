@@ -1,6 +1,38 @@
 #include"Element.h"
 #include"vecmat.h"
 
+double dlugosc(wxPoint pierwszy, wxPoint drugi)
+{
+	double tmpX = pierwszy.x - drugi.x;
+	double tmpY = pierwszy.y - drugi.y;
+	return sqrt(pow(tmpX, 2) + pow(tmpY, 2));
+}
+
+/////////////////////////////////////////////////////
+// Klasa Element
+/////////////////////////////////////////////////////
+
+Matrix Element::LeftRotate(int alfa, int w, int h)
+{
+	Matrix rotate;
+	rotate.data[0][0] = cos(-alfa * M_PI / 180.0);
+	rotate.data[1][1] = cos(-alfa * M_PI / 180.0);
+	rotate.data[0][1] = -sin(-alfa * M_PI / 180.0);
+	rotate.data[1][0] = sin(-alfa * M_PI / 180.0);
+	return rotate;
+}
+
+Matrix Element::RightRotate(int beta, int w, int h)
+{
+	Matrix rotate;
+	rotate.data[0][0] = cos(beta* M_PI / 180.0);
+	rotate.data[1][1] = cos(beta* M_PI / 180.0);
+	rotate.data[0][1] = -sin(beta* M_PI / 180.0);
+	rotate.data[1][0] = sin(beta* M_PI / 180.0);
+
+	return rotate;
+}
+
 Matrix Element::Set_ReturnTranslate()
 {
 	Matrix 	returnTranslate;
@@ -10,6 +42,7 @@ Matrix Element::Set_ReturnTranslate()
 	returnTranslate.data[1][2] = -srodekY;
 	return returnTranslate;
 }
+
 Matrix Element::Set_Translate()
 {
 	Matrix translate;
@@ -19,6 +52,10 @@ Matrix Element::Set_Translate()
 	translate.data[1][2] = srodekY;
 	return translate;
 }
+
+/////////////////////////////////////////////////////
+// Klasa Triangle
+/////////////////////////////////////////////////////
 
 void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 {
@@ -44,31 +81,12 @@ void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 	dc->DrawPolygon(3,tmpPoints);
 	dc->SetPen(*wxBLACK);
 }
+
 void Triangle::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3)
 {
 	Points[0] = wxPoint(x1, y1);
 	Points[1] = wxPoint(x2, y2);
 	Points[2] = wxPoint(x3, y3);
-}
-
-Matrix Triangle::LeftRotate(int alfa,int w, int h)
-{
-	Matrix rotate;
-	rotate.data[0][0] = cos(-alfa* M_PI / 180.0);
-	rotate.data[1][1] = cos(-alfa* M_PI / 180.0);
-	rotate.data[0][1] = -sin(-alfa* M_PI / 180.0);
-	rotate.data[1][0] = sin(-alfa* M_PI / 180.0);
-	return rotate;
-}
-Matrix Triangle::RightRotate(int beta, int w, int h)
-{
-	Matrix rotate;
-	rotate.data[0][0] = cos(beta* M_PI / 180.0);
-	rotate.data[1][1] = cos(beta* M_PI / 180.0);
-	rotate.data[0][1] = -sin(beta* M_PI / 180.0);
-	rotate.data[1][0] = sin(beta* M_PI / 180.0);
-
-	return rotate;
 }
 
 void Triangle:: Symetria()
@@ -104,29 +122,11 @@ void Triangle::AddToPoint(int x, int y)
 	Points[2].x += x;
 	Points[2].y += y;
 }
-void Triangle::SetNewPoints()
-{
-	int w = 0; int h = 0;
-	Matrix transformation;
-	transformation = Set_Translate() *RightRotate(m_beta, w, h)* LeftRotate(m_alfa, w, h)*Set_ReturnTranslate();
-	Vector first;
-	first.Set(Points[0].x, Points[0].y);
-	first = transformation * first;
-	Vector second;
-	second.Set(Points[1].x, Points[1].y);
-	second = transformation * second;
-	Vector third;
-	third.Set(Points[2].x, Points[2].y);
-	third = transformation * third;
-	Points[0].x = first.GetX();
-	Points[0].y = first.GetY();
-	Points[1].x = second.GetX();
-	Points[1].y = second.GetY();
-	Points[2].x = third.GetX();
-	Points[2].y = third.GetY();
 
-}
-//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+// Klasa Square
+/////////////////////////////////////////////////////
+
 void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
@@ -163,25 +163,6 @@ void Square::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, i
 	Points[2] = wxPoint(x3, y3);
 	Points[3] = wxPoint(x4, y4);
 }
-Matrix Square::LeftRotate(int alfa, int w, int h)
-{
-	Matrix rotate;
-	rotate.data[0][0] = cos(-alfa * M_PI / 180.0);
-	rotate.data[1][1] = cos(-alfa * M_PI / 180.0);
-	rotate.data[0][1] = -sin(-alfa * M_PI / 180.0);
-	rotate.data[1][0] = sin(-alfa * M_PI / 180.0);
-	return rotate;
-}
-Matrix Square::RightRotate(int beta, int w, int h)
-{
-	Matrix rotate;
-	rotate.data[0][0] = cos(beta* M_PI / 180.0);
-	rotate.data[1][1] = cos(beta* M_PI / 180.0);
-	rotate.data[0][1] = -sin(beta* M_PI / 180.0);
-	rotate.data[1][0] = sin(beta* M_PI / 180.0);
-
-	return rotate;
-}
 
 void Square::Symetria()
 {
@@ -196,10 +177,10 @@ bool Square::isCursorInShape(wxPoint mousePoints)
 	dlugosc2 = dlugosc(tmpPoints[1], mousePoints);
 	dlugosc3 = dlugosc(tmpPoints[2], mousePoints);
 	dlugosc4 = dlugosc(tmpPoints[3], mousePoints);
-	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2. * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2. * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugosc34, 2)) / (2. * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugosc41, 2)) / (2. * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugoscBoku, 2)) / (2. * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugoscBoku, 2)) / (2. * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugoscBoku, 2)) / (2. * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugoscBoku, 2)) / (2. * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
 	if (fabs(360 - alfa * 180 / M_PI) < 12) return true;
 	return false;
 }
@@ -219,7 +200,11 @@ void Square::AddToPoint(int x, int y)
 	Points[3].x += x;
 	Points[3].y += y;
 }
-//edited 21.05
+
+/////////////////////////////////////////////////////
+// Klasa Parallelogram
+/////////////////////////////////////////////////////
+
 void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
@@ -259,32 +244,12 @@ void Parallelogram::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, in
 	Points[3] = wxPoint(x4, y4);
 
 }
-Matrix Parallelogram::LeftRotate(int alfa, int w, int h)
-{
-	Matrix rotate;
-	rotate.data[0][0] = cos(-alfa * M_PI / 180.0);
-	rotate.data[1][1] = cos(-alfa * M_PI / 180.0);
-	rotate.data[0][1] = -sin(-alfa * M_PI / 180.0);
-	rotate.data[1][0] = sin(-alfa * M_PI / 180.0);
-	return rotate;
 
-}
-Matrix Parallelogram::RightRotate(int beta, int w, int h)
-{
-	Matrix rotate;
-	rotate.data[0][0] = cos(beta* M_PI / 180.0);
-	rotate.data[1][1] = cos(beta* M_PI / 180.0);
-	rotate.data[0][1] = -sin(beta* M_PI / 180.0);
-	rotate.data[1][0] = sin(beta* M_PI / 180.0);
-
-	return rotate;
-
-}
 void Parallelogram::Symetria()
 {
 
 }
-//end editing
+
 bool Parallelogram::isCursorInShape(wxPoint mousePoints)
 {
 	double alfa = 0;
@@ -293,10 +258,10 @@ bool Parallelogram::isCursorInShape(wxPoint mousePoints)
 	dlugosc2 = dlugosc(tmpPoints[1], mousePoints);
 	dlugosc3 = dlugosc(tmpPoints[2], mousePoints);
 	dlugosc4 = dlugosc(tmpPoints[3], mousePoints);
-	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2 * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugosc34, 2)) / (2 * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
-	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugosc41, 2)) / (2 * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugoscPodstawa, 2)) / (2 * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugoscRamie, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugoscPodstawa, 2)) / (2 * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
+	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugoscRamie, 2)) / (2 * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
 	if (fabs(360 - alfa * 180 / M_PI) < 10) return true;
 	return false;
 }
@@ -315,10 +280,4 @@ void Parallelogram::AddToPoint(int x, int y)
 	Points[2].y += y;
 	Points[3].x += x;
 	Points[3].y += y;
-}
-double dlugosc(wxPoint pierwszy, wxPoint drugi)
-{
-	double tmpX = pierwszy.x - drugi.x;
-	double tmpY = pierwszy.y - drugi.y;
-	return sqrt(pow(tmpX,2) + pow(tmpY,2));
 }
