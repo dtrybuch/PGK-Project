@@ -273,7 +273,7 @@ void TANGRAMFrame::cleanButtonClick(wxCommandEvent& event)
 	Draw();
 }
 
-void TANGRAMFrame::losujButtonClick(wxCommandEvent& event)
+void TANGRAMFrame::startButtonClick(wxCommandEvent& event)
 {
 	losowanie();
 }

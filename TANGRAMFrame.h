@@ -33,7 +33,7 @@ protected:
 	void KeyEvent(wxKeyEvent& event);
 	void obrotLewoUpdate(wxScrollEvent& event);
 	void cleanButtonClick(wxCommandEvent& event);
-	void losujButtonClick(wxCommandEvent& event);
+	void startButtonClick(wxCommandEvent& event);
 	void UpdateUI(wxUpdateUIEvent& event);
 	void losowanie();
 	void stopnie45Button(wxCommandEvent& event);
