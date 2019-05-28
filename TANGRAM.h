@@ -51,7 +51,7 @@ class Frame : public wxFrame
 		wxStaticText* instrukcja4;
 		wxStaticText* instrukcja5;
 		wxPanel* ksztalt;
-		wxButton* losuj;
+		wxButton* start;
 		wxStaticText* wybierzKat;
 		wxRadioButton* stopnie45;
 		wxRadioButton* stopnie90;
@@ -69,7 +69,7 @@ class Frame : public wxFrame
 		virtual void KeyEvent( wxKeyEvent& event ) { event.Skip(); }
 		virtual void obrotLewoUpdate( wxScrollEvent& event ) { event.Skip(); }
 		virtual void cleanButtonClick( wxCommandEvent& event ) { event.Skip(); }
-		virtual void losujButtonClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void startButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void UpdateUI(wxUpdateUIEvent& event) { event.Skip(); }
 		virtual void stopnie45Button(wxCommandEvent& event) { event.Skip(); }
 		virtual void stopnie90Button(wxCommandEvent& event) { event.Skip(); }

@@ -375,35 +375,35 @@ void TANGRAMFrame::losowanie()
 
 void TANGRAMFrame::stopnie45Button(wxCommandEvent& event)
 {
-	// TODO: Implement stopnie45Button
+	obrotPrawo->SetThumbPosition(45);
 }
 
 void TANGRAMFrame::stopnie90Button(wxCommandEvent& event)
 {
-	// TODO: Implement stopnie90Button
+	obrotPrawo->SetThumbPosition(90);
 }
 
 void TANGRAMFrame::stopnie135Button(wxCommandEvent& event)
 {
-	// TODO: Implement stopnie135Button
+	obrotPrawo->SetThumbPosition(135);
 }
 
 void TANGRAMFrame::stopnie180Button(wxCommandEvent& event)
 {
-	// TODO: Implement stopnie180Button
+	obrotPrawo->SetThumbPosition(180);
 }
 
 void TANGRAMFrame::stopnie235Button(wxCommandEvent& event)
 {
-	// TODO: Implement stopnie235Button
+	obrotPrawo->SetThumbPosition(235);
 }
 
 void TANGRAMFrame::stopnie270Button(wxCommandEvent& event)
 {
-	// TODO: Implement stopnie270Button
+	obrotPrawo->SetThumbPosition(270);
 }
 
 void TANGRAMFrame::stopnie315Button(wxCommandEvent& event)
 {
-	// TODO: Implement stopnie315Button
+	obrotPrawo->SetThumbPosition(315);
 }
