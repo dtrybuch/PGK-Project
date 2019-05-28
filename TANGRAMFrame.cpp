@@ -38,48 +38,110 @@ void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 	wxPoint mousePoints{ wxGetMousePosition().x - this->GetScreenPosition().x - 14, wxGetMousePosition().y - this->GetScreenPosition().y - 44 };
 	if (bigTriangle1.isCursorInShape(mousePoints))
 	{
+		if (which != &bigTriangle1)
+		{
+			which->m_alfa += obrotLewo->GetThumbPosition();
+			which->m_beta += obrotPrawo->GetThumbPosition();
+			obrotLewo->SetThumbPosition(0);
+			obrotPrawo->SetThumbPosition(0);
+			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+		}
 		which->isClicking = false;
 		which = &bigTriangle1;
 		which->isClicking = true;
 	}
 	else if (bigTriangle2.isCursorInShape(mousePoints))
 	{
+		if (which != &bigTriangle2)
+		{
+			which->m_alfa += obrotLewo->GetThumbPosition();
+			which->m_beta += obrotPrawo->GetThumbPosition();
+			obrotLewo->SetThumbPosition(0);
+			obrotPrawo->SetThumbPosition(0);
+			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+		}
 		which->isClicking = false;
 		which = &bigTriangle2;
 		which->isClicking = true;
 	}
 	else if (middleTriangle.isCursorInShape(mousePoints))
 	{
+		if (which != &middleTriangle)
+		{
+			which->m_alfa += obrotLewo->GetThumbPosition();
+			which->m_beta += obrotPrawo->GetThumbPosition();
+			obrotLewo->SetThumbPosition(0);
+			obrotPrawo->SetThumbPosition(0);
+			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+		}
 		which->isClicking = false;
 		which = &middleTriangle;
 		which->isClicking = true;
 	}
 	else if (smallTriangle1.isCursorInShape(mousePoints))
 	{
+		if (which != &smallTriangle1)
+		{
+			which->m_alfa += obrotLewo->GetThumbPosition();
+			which->m_beta += obrotPrawo->GetThumbPosition();
+			obrotLewo->SetThumbPosition(0);
+			obrotPrawo->SetThumbPosition(0);
+			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+		}
 		which->isClicking = false;
 		which = &smallTriangle1;
 		which->isClicking = true;
 	}
 	else if (smallTriangle2.isCursorInShape(mousePoints))
 	{
+		if (which != &smallTriangle2)
+		{
+			which->m_alfa += obrotLewo->GetThumbPosition();
+			which->m_beta += obrotPrawo->GetThumbPosition();
+			obrotLewo->SetThumbPosition(0);
+			obrotPrawo->SetThumbPosition(0);
+			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+		}
 		which->isClicking = false;
 		which = &smallTriangle2;
 		which->isClicking = true;
 	}
 	else if (square.isCursorInShape(mousePoints))
 	{
+		if (which != &square)
+		{
+			which->m_alfa += obrotLewo->GetThumbPosition();
+			which->m_beta += obrotPrawo->GetThumbPosition();
+			obrotLewo->SetThumbPosition(0);
+			obrotPrawo->SetThumbPosition(0);
+			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+		}
 		which->isClicking = false;
 		which = &square;
 		which->isClicking = true;
 	}
 	else if (parallelogram.isCursorInShape(mousePoints))
 	{
+		if (which != &parallelogram)
+		{
+			which->m_alfa += obrotLewo->GetThumbPosition();
+			which->m_beta += obrotPrawo->GetThumbPosition();
+			obrotLewo->SetThumbPosition(0);
+			obrotPrawo->SetThumbPosition(0);
+			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
+		}
 		which->isClicking = false;
 		which = &parallelogram;
 		which->isClicking = true;
 	}
 	//endediting 27.05
-	Draw();
 	
 }
 void TANGRAMFrame::MouseUp(wxMouseEvent& event)
@@ -112,8 +174,6 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 	{
 		bigTriangle1.AddToPoint(mouseX,mouseY);
 		bigTriangle1.setSrodek();
-		which->isClicking = false;
-		bigTriangle1.isClicking = true;
 		which->isMoving = false;
 		bigTriangle1.isMoving = true;
 		which = &bigTriangle1;
@@ -122,8 +182,6 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 	{
 		bigTriangle2.AddToPoint(mouseX, mouseY);
 		bigTriangle2.setSrodek();
-		which->isClicking = false;
-		bigTriangle2.isClicking = true;
 		which->isMoving = false;
 		bigTriangle2.isMoving = true;
 		which = &bigTriangle2;
@@ -132,8 +190,6 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 	{
 		middleTriangle.AddToPoint(mouseX, mouseY);
 		middleTriangle.setSrodek();
-		which->isClicking = false;
-		middleTriangle.isClicking = true;
 		which->isMoving = false;
 		middleTriangle.isMoving = true;
 		which = &middleTriangle;
@@ -142,8 +198,6 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 	{
 		smallTriangle1.AddToPoint(mouseX, mouseY);
 		smallTriangle1.setSrodek();
-		which->isClicking = false;
-		smallTriangle1.isClicking = true;
 		which->isMoving = false;
 		smallTriangle1.isMoving = true;
 		which = &smallTriangle1;
@@ -152,8 +206,6 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 	{
 		smallTriangle2.AddToPoint(mouseX, mouseY);
 		smallTriangle2.setSrodek();
-		which->isClicking = false;
-		smallTriangle2.isClicking = true;
 		which->isMoving = false;
 		smallTriangle2.isMoving = true;	
 		which = &smallTriangle2;
@@ -162,8 +214,6 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 	{
 		square.AddToPoint(mouseX, mouseY);
 		square.setSrodek();
-		which->isClicking = false;
-		square.isClicking = true;
 		which->isMoving = false;
 		square.isMoving = true;
 		which = &square;
@@ -172,13 +222,11 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 	{
 		parallelogram.AddToPoint(mouseX, mouseY);
 		parallelogram.setSrodek();
-		which->isClicking = false;
-		parallelogram.isClicking = true;
 		which->isMoving = false;
 		parallelogram.isMoving = true;	
 		which = &parallelogram;
 	}
-	if (wxGetMousePosition().x - this->GetScreenPosition().x - 14 > menu->GetSize().x || wxGetMousePosition().y - this->GetScreenPosition().y - 44 > menu->GetSize().y)
+	if (wxGetMousePosition().x - this->GetScreenPosition().x - 14 > menu->GetSize().x || wxGetMousePosition().x - this->GetScreenPosition().x - 14 < 0 || wxGetMousePosition().y - this->GetScreenPosition().y - 44 > menu->GetSize().y || wxGetMousePosition().y - this->GetScreenPosition().y - 44 < 0)
 	{
 		which->isMoving = false;
 		//24.05
