@@ -288,21 +288,22 @@ void TANGRAMFrame::Draw()
 	if (obrotLewo->GetThumbPosition() == 359) obrotLewo->SetThumbPosition(0);
 	if (obrotPrawo->GetThumbPosition() == 359) obrotPrawo->SetThumbPosition(0);
 	//edited 24.05
+	if (smallTriangle1.isClicking) smallTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa + obrotLewo->GetThumbPosition(), smallTriangle1.m_beta + obrotPrawo->GetThumbPosition());
+	else smallTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa, smallTriangle1.m_beta);
+	if (smallTriangle2.isClicking) smallTriangle2.Draw(&dc, w, h, smallTriangle2.m_alfa + obrotLewo->GetThumbPosition(), smallTriangle2.m_beta + obrotPrawo->GetThumbPosition());
+	else smallTriangle2.Draw(&dc, w, h, smallTriangle2.m_alfa, smallTriangle2.m_beta);
+	if (square.isClicking) square.Draw(&dc, w, h, square.m_alfa + obrotLewo->GetThumbPosition(), square.m_beta + obrotPrawo->GetThumbPosition());
+	else square.Draw(&dc, w, h, square.m_alfa, square.m_beta);
+	if (parallelogram.isClicking)parallelogram.Draw(&dc, w, h, parallelogram.m_alfa + obrotLewo->GetThumbPosition(), parallelogram.m_beta + obrotPrawo->GetThumbPosition());
+	else parallelogram.Draw(&dc, w, h, parallelogram.m_alfa, parallelogram.m_beta);
+	if (middleTriangle.isClicking) middleTriangle.Draw(&dc, w, h, middleTriangle.m_alfa + obrotLewo->GetThumbPosition(), middleTriangle.m_beta + obrotPrawo->GetThumbPosition());
+	else  middleTriangle.Draw(&dc, w, h, middleTriangle.m_alfa, middleTriangle.m_beta);
 	if(bigTriangle1.isClicking) bigTriangle1.Draw(&dc, w, h, bigTriangle1.m_alfa + obrotLewo->GetThumbPosition(),bigTriangle1.m_beta + obrotPrawo->GetThumbPosition());
 	else bigTriangle1.Draw(&dc, w, h, bigTriangle1.m_alfa, bigTriangle1.m_beta);
 	if(bigTriangle2.isClicking) bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa + obrotLewo->GetThumbPosition(), bigTriangle2.m_beta + obrotPrawo->GetThumbPosition());
 	else bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa, bigTriangle2.m_beta);
-	if(square.isClicking) square.Draw(&dc, w, h,square.m_alfa +  obrotLewo->GetThumbPosition(), square.m_beta + obrotPrawo->GetThumbPosition());
-	else square.Draw(&dc, w, h, square.m_alfa, square.m_beta);
-	if(smallTriangle1.isClicking) smallTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa + obrotLewo->GetThumbPosition(), smallTriangle1.m_beta + obrotPrawo->GetThumbPosition());
-	else smallTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa, smallTriangle1.m_beta);
-	if (smallTriangle2.isClicking) smallTriangle2.Draw(&dc, w, h, smallTriangle2.m_alfa + obrotLewo->GetThumbPosition(), smallTriangle2.m_beta + obrotPrawo->GetThumbPosition());
-	else smallTriangle2.Draw(&dc, w, h, smallTriangle2.m_alfa, smallTriangle2.m_beta);
-	if(middleTriangle.isClicking) middleTriangle.Draw(&dc, w, h,middleTriangle.m_alfa + obrotLewo->GetThumbPosition(),middleTriangle.m_beta + obrotPrawo->GetThumbPosition());
-	else  middleTriangle.Draw(&dc, w, h, middleTriangle.m_alfa, middleTriangle.m_beta);
-	if(parallelogram.isClicking)parallelogram.Draw(&dc, w, h, parallelogram.m_alfa + obrotLewo->GetThumbPosition(), parallelogram.m_beta + obrotPrawo->GetThumbPosition());
-	else parallelogram.Draw(&dc, w, h, parallelogram.m_alfa, parallelogram.m_beta);
-
+	
+	which->Draw(&dc, w, h, which->m_alfa + obrotLewo->GetThumbPosition(), which->m_beta + obrotPrawo->GetThumbPosition());
 	//endediting 24.05
 
 	if (ksztaltImage.IsOk())
@@ -376,34 +377,41 @@ void TANGRAMFrame::losowanie()
 void TANGRAMFrame::stopnie45Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(45);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
 
 void TANGRAMFrame::stopnie90Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(90);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
 
 void TANGRAMFrame::stopnie135Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(135);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
 
 void TANGRAMFrame::stopnie180Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(180);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
 
 void TANGRAMFrame::stopnie235Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(235);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
 
 void TANGRAMFrame::stopnie270Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(270);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
 
 void TANGRAMFrame::stopnie315Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(315);
+	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
