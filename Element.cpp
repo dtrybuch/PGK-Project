@@ -65,11 +65,11 @@ Matrix Element::Symetria()
 // Klasa Triangle
 /////////////////////////////////////////////////////
 
-void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
+void Triangle::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
 	if (isSymetriaClicking) transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Symetria()*Set_ReturnTranslate();
-	else transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa,w,h)*Set_ReturnTranslate();
+	else transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -87,7 +87,7 @@ void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 	tmpPoints[2].y = third.GetY();
 	if (isClicking) dc->SetPen(*wxYELLOW);
 	dc->SetBrush(*wxGREY_BRUSH);
-	dc->DrawPolygon(3,tmpPoints);
+	dc->DrawPolygon(3, tmpPoints);
 	dc->SetPen(*wxBLACK);
 }
 
@@ -103,10 +103,10 @@ bool Triangle::isCursorInShape(wxPoint mousePoints)
 {
 	double alfa = 0;
 	double dlugosc1, dlugosc2, dlugosc3;
-	dlugosc1 = dlugosc(tmpPoints[0],mousePoints);
-	dlugosc2 = dlugosc(tmpPoints[1],mousePoints);
-	dlugosc3 = dlugosc(tmpPoints[2],mousePoints);
-	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2*dlugosc1*dlugosc2));//z twierdzenia o cosinusach
+	dlugosc1 = dlugosc(tmpPoints[0], mousePoints);
+	dlugosc2 = dlugosc(tmpPoints[1], mousePoints);
+	dlugosc3 = dlugosc(tmpPoints[2], mousePoints);
+	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2 * dlugosc1*dlugosc2));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc1, 2) - pow(dlugosc31, 2)) / (2 * dlugosc1*dlugosc3));//z twierdzenia o cosinusach
 	double liczba = fabs(360. - alfa * 180 / M_PI);
@@ -174,7 +174,7 @@ void Square::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, i
 bool Square::isCursorInShape(wxPoint mousePoints)
 {
 	double alfa = 0;
-	double dlugosc1, dlugosc2, dlugosc3,dlugosc4;
+	double dlugosc1, dlugosc2, dlugosc3, dlugosc4;
 	dlugosc1 = dlugosc(tmpPoints[0], mousePoints);
 	dlugosc2 = dlugosc(tmpPoints[1], mousePoints);
 	dlugosc3 = dlugosc(tmpPoints[2], mousePoints);

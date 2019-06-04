@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <wx/dcclient.h>
 #include <wx/colourdata.h>
 #include <wx/colordlg.h>
@@ -9,7 +9,7 @@ double dlugosc(wxPoint pierwszy, wxPoint drugi);
 /**
 * <summary> Klasa Element, reprezentujaca jedna z figur tangramu </summary>
 */
-class Element{
+class Element {
 public:
 	/**
 	* <summary> Metoda Draw, pozwalaj¹ca na narysowanie elementu na obiekcie 'dc' </summary>
@@ -29,30 +29,28 @@ public:
 	* <returns> Macierz Translacji odwrotnej, wykorzystywana na koncu ciagu przeksztalcen <\returns>
 	*/
 	Matrix 	Set_ReturnTranslate();
-	
+
 	/**
 	* <summary> Metoda LeftRotate, obliczajaca macierz rotacji w lewo <\summary>
 	* < returns> Macierz rotacji <\returns>
 	*/
 	Matrix LeftRotate(int alfa, int w, int h);
-	
+
 	/**
 	* <summary> Metoda RightRotate, obliczajaca macierz rotacji w prawo <\summary>
 	* < returns> Macierz rotacji <\returns>
 	*/
 	Matrix RightRotate(int beta, int w, int h);
-	
+
 	/**
-	* <summary> Metoda isCursorInShape sprawdzajaca czy kursor 
+	* <summary> Metoda isCursorInShape sprawdzajaca czy kursor
 	* jest aktualnie w obrebie figury <\summary>
 	*/
 	virtual bool isCursorInShape(wxPoint mousePoints) = 0;
-
 	/**
 	* <summary> Metoda GetPoints zwracajaca tmpPoints<\summary>
 	*/
 	virtual wxPoint * GetTmpPoints() = 0;
-
 	/**
 	* <summary> Metoda Symetria, obliczajaca macierz symetrii
 	* <\summary>
@@ -64,7 +62,7 @@ public:
 	* <remarks> Ustawia skladniki srodekX, srodekY figury <\remarks>
 	*/
 	virtual void setSrodek() = 0;//22.05 dodatkowa funkcja ustwiajaca srodek 
-	
+
 	/**
 	* <summary> Metoda AddToPoint, wspomagajaca plynne poruszanie sie elementow <\summary>
 	* <remarks> Aktualizuje polozenie punktow wierzcholkowych figury w trakcie ruchu
@@ -72,12 +70,12 @@ public:
 	*/
 	virtual void AddToPoint(int x, int y) = 0;
 
-	/** <value> 
-	* Czy ten obiekt sie porusza? 
-	* <\value> 
+	/** <value>
+	* Czy ten obiekt sie porusza?
+	* <\value>
 	*/
-	bool isMoving = false;
 
+	bool isMoving = false;
 	/** <value>
 	* Ustawia poczatkowe punkty biorac pod uwage tmpPoints
 	* <\value>
@@ -87,17 +85,16 @@ public:
 	* <\value>
 	*/
 	virtual void SetTmpPoints() = 0;
-
-
-	/** <value> 
-	* Czy ten obiekt jest wybrany? 
-	* <\value> 
+	/** <value>
+	* Czy ten obiekt jest wybrany?
+	* <\value>
 	*/
 	bool isClicking = false;
 	/** <value>
 	* Czy przycisk symetria został naciśniety?
 	* <\value>
 	*/
+
 	bool isSymetriaClicking = false;
 	// <value> Wartosc X srodka figury <\value>
 	int srodekX;
@@ -115,23 +112,23 @@ protected:
 
 /**
 * <summary> Klasa Triangle reprezentujaca trojkat <\summary>
-* 
+*
 */
 class Triangle :public Element
 {
 public:
-	Triangle(){}
+	Triangle() {}
 	/**
-	* <remarks> 
-	* Argumenty konstruktora to kolejne wspolrzedne wierzcholkow, 
+	* <remarks>
+	* Argumenty konstruktora to kolejne wspolrzedne wierzcholkow,
 	* rozpoczynajac od najbardziej lewego, zgodnie ze wskazowkami zegara
 	* <\remarks>
 	*/
 	Triangle(int x1, int y1, int x2, int y2, int x3, int y3)
 	{
-		Points[0] = wxPoint(x1,y1);
-		Points[1] = wxPoint(x2,y2);
-		Points[2] = wxPoint(x3,y3);
+		Points[0] = wxPoint(x1, y1);
+		Points[1] = wxPoint(x2, y2);
+		Points[2] = wxPoint(x3, y3);
 		setSrodek();
 		dlugosc12 = dlugosc(Points[0], Points[1]);
 		dlugosc23 = dlugosc(Points[1], Points[2]);
@@ -139,7 +136,7 @@ public:
 		SetBeforePoints();
 	}
 
-	void Draw( wxDC *dc,int w, int h, int alfa, int beta);
+	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3);
 	bool isCursorInShape(wxPoint mousePoints);
 	void setSrodek();
@@ -157,7 +154,6 @@ public:
 		Points[1] = beforePoints[1];
 		Points[2] = beforePoints[2];
 	}
-
 protected:
 	/**
 	* <value> Bazowe punkty wierzcholkowe trojkata <\value>
@@ -168,12 +164,10 @@ protected:
 	* <value> Wierzcholki trojkata po transformacji <\value>
 	*/
 	wxPoint tmpPoints[3];
-
 	/**
 	* <value> Wierzcholki trojkata przed przesuwaniem <\value>
 	*/
 	wxPoint beforePoints[3];
-
 	/**
 	* Kolejne dlugosci bokow trojkata
 	*/
@@ -186,9 +180,9 @@ protected:
 /**
 * <summary> klasa Square reprezentujaca kwadrat <\summary>
 */
-class Square :public Element{
+class Square :public Element {
 public:
-	Square(){}
+	Square() {}
 	/**
 	* <remarks>
 	* Argumenty konstruktora to kolejne wspolrzedne wierzcholkow,
@@ -203,13 +197,13 @@ public:
 		Points[3] = wxPoint(x4, y4);
 		setSrodek();
 		dlugoscBoku = dlugosc(Points[0], Points[1]);
+		SetBeforePoints();
 	}
 	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4);
 	bool isCursorInShape(wxPoint mousePoints);
 	void setSrodek();
 	void AddToPoint(int x, int y);
-
 	wxPoint * GetTmpPoints() { return tmpPoints; }
 	void SetBeforePoints()
 	{
@@ -226,22 +220,19 @@ public:
 		Points[3] = beforePoints[3];
 	}
 protected:
-	/** 
+	/**
 	* <values> Punkty wierzcholkowe kwadratu <\values>
 	*/
 	wxPoint Points[4];
 
 	/**
-	* <value> Wierzcholki trojkata przed przesuwaniem <\value>
-	*/
-	wxPoint beforePoints[4];
-
-	
-	/**
 	* <values> Wierzcholki kwadratu po transformacji <\values>
 	*/
 	wxPoint tmpPoints[4];
-
+	/**
+	* <value> Wierzcholki trojkata przed przesuwaniem <\value>
+	*/
+	wxPoint beforePoints[4];
 	/**
 	* <value> dlugosc boku kwadratu <\value>
 	*/
@@ -254,7 +245,7 @@ protected:
 class Parallelogram : public Element
 {
 public:
-	Parallelogram(){}
+	Parallelogram() {}
 	/**
 	* <remarks>
 	* Argumenty konstruktora to kolejne wspolrzedne wierzcholkow,
@@ -262,7 +253,7 @@ public:
 	* Czwarty wierzcholek jest obliczany automatycznie.
 	* <\remarks>
 	*/
-	Parallelogram(int x1, int y1, int x2, int y2, int x3, int y3) 
+	Parallelogram(int x1, int y1, int x2, int y2, int x3, int y3)
 	{
 		int length = x2 - x1;
 		int x4 = x1 + (x3 - x2);
@@ -274,7 +265,6 @@ public:
 		setSrodek();
 		dlugoscPodstawa = dlugosc(Points[0], Points[1]);
 		dlugoscRamie = dlugosc(Points[1], Points[2]);
-
 		SetBeforePoints();
 	}
 
@@ -309,17 +299,13 @@ protected:
 	* <value> Punkty wierzcholkowe rownolegloboku po transformacji </value>
 	*/
 	wxPoint tmpPoints[4];
-
 	/**
 	* <value> Wierzcholki trojkata przed przesuwaniem <\value>
 	*/
 	wxPoint beforePoints[4];
-
 	/**
 	* <value> Dlugosci bokow rownolegloboku </value>
 	*/
 	double dlugoscPodstawa;
 	double dlugoscRamie;
 };
-
-

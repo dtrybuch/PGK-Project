@@ -1,18 +1,19 @@
 ﻿  Element.cpp
+  TANGRAM.cpp
   TANGRAMFrame.cpp
-c:\users\dom\desktop\project1\project1\tangramframe.cpp(182): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
+c:\users\dom\desktop\project1\project1\tangramframe.cpp(245): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
   c:\users\dom\desktop\wxwidgets-3.0.4\include\wx\mousestate.h(129): note: see declaration of 'wxMouseState::LeftDown'
-c:\users\dom\desktop\project1\project1\tangramframe.cpp(190): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
+c:\users\dom\desktop\project1\project1\tangramframe.cpp(253): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
   c:\users\dom\desktop\wxwidgets-3.0.4\include\wx\mousestate.h(129): note: see declaration of 'wxMouseState::LeftDown'
-c:\users\dom\desktop\project1\project1\tangramframe.cpp(198): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
+c:\users\dom\desktop\project1\project1\tangramframe.cpp(261): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
   c:\users\dom\desktop\wxwidgets-3.0.4\include\wx\mousestate.h(129): note: see declaration of 'wxMouseState::LeftDown'
-c:\users\dom\desktop\project1\project1\tangramframe.cpp(206): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
+c:\users\dom\desktop\project1\project1\tangramframe.cpp(269): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
   c:\users\dom\desktop\wxwidgets-3.0.4\include\wx\mousestate.h(129): note: see declaration of 'wxMouseState::LeftDown'
-c:\users\dom\desktop\project1\project1\tangramframe.cpp(214): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
+c:\users\dom\desktop\project1\project1\tangramframe.cpp(277): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
   c:\users\dom\desktop\wxwidgets-3.0.4\include\wx\mousestate.h(129): note: see declaration of 'wxMouseState::LeftDown'
-c:\users\dom\desktop\project1\project1\tangramframe.cpp(222): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
+c:\users\dom\desktop\project1\project1\tangramframe.cpp(285): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
   c:\users\dom\desktop\wxwidgets-3.0.4\include\wx\mousestate.h(129): note: see declaration of 'wxMouseState::LeftDown'
-c:\users\dom\desktop\project1\project1\tangramframe.cpp(230): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
+c:\users\dom\desktop\project1\project1\tangramframe.cpp(293): warning C4996: 'wxMouseState::LeftDown': was declared deprecated
   c:\users\dom\desktop\wxwidgets-3.0.4\include\wx\mousestate.h(129): note: see declaration of 'wxMouseState::LeftDown'
   main.cpp
   Generating Code...
