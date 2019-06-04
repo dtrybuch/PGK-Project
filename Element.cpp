@@ -109,7 +109,8 @@ bool Triangle::isCursorInShape(wxPoint mousePoints)
 	alfa += acos((pow(dlugosc1, 2) + pow(dlugosc2, 2) - pow(dlugosc12, 2)) / (2*dlugosc1*dlugosc2));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugosc23, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc1, 2) - pow(dlugosc31, 2)) / (2 * dlugosc1*dlugosc3));//z twierdzenia o cosinusach
-	if (fabs(360 - alfa * 180./M_PI) < 5) return true;
+	double liczba = fabs(360. - alfa * 180 / M_PI);
+	if (fabs(360. - alfa * 180./M_PI) < 5) return true;
 	return false;
 }
 void Triangle::setSrodek()
@@ -260,6 +261,7 @@ bool Parallelogram::isCursorInShape(wxPoint mousePoints)
 	alfa += acos((pow(dlugosc2, 2) + pow(dlugosc3, 2) - pow(dlugoscRamie, 2)) / (2 * dlugosc2*dlugosc3));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc3, 2) + pow(dlugosc4, 2) - pow(dlugoscPodstawa, 2)) / (2 * dlugosc3*dlugosc4));//z twierdzenia o cosinusach
 	alfa += acos((pow(dlugosc4, 2) + pow(dlugosc1, 2) - pow(dlugoscRamie, 2)) / (2 * dlugosc1*dlugosc4));//z twierdzenia o cosinusach
+	double liczba = fabs(360 - alfa * 180 / M_PI);
 	if (fabs(360 - alfa * 180 / M_PI) < 10) return true;
 	return false;
 }

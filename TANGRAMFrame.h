@@ -64,6 +64,8 @@ protected:
 	Square square;
 	Parallelogram parallelogram;
 	wxPoint firstMousePosition;
+	int menuWidth;//poprzednia szerokosc okna
+	int menuHeight;//poprzednia dlugosc okna
 	//end editing
 
 };

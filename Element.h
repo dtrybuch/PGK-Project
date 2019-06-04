@@ -47,7 +47,10 @@ public:
 	* jest aktualnie w obrebie figury <\summary>
 	*/
 	virtual bool isCursorInShape(wxPoint mousePoints) = 0;
-	
+	/**
+	* <summary> Metoda GetPoints zwracajaca tmpPoints<\summary>
+	*/
+	virtual wxPoint * GetTmpPoints() = 0;
 	/**
 	* <summary> Metoda Symetria, obliczajaca macierz symetrii
 	* <\summary>
@@ -71,8 +74,17 @@ public:
 	* Czy ten obiekt sie porusza? 
 	* <\value> 
 	*/
+	
 	bool isMoving = false;
-
+	/** <value>
+	* Ustawia poczatkowe punkty biorac pod uwage tmpPoints
+	* <\value>
+	*/
+	virtual void SetBeforePoints() = 0;	/** <value>
+	* Ustawia wartosci tmpPoints wkladajac do nich before Points (przywraca je do postaci sprzed przesuniecia)
+	* <\value>
+	*/
+	virtual void SetTmpPoints() = 0;
 	/** <value> 
 	* Czy ten obiekt jest wybrany? 
 	* <\value> 
@@ -82,6 +94,7 @@ public:
 	* Czy przycisk symetria został naciśniety?
 	* <\value>
 	*/
+
 	bool isSymetriaClicking = false;
 	// <value> Wartosc X srodka figury <\value>
 	int srodekX;
@@ -120,6 +133,7 @@ public:
 		dlugosc12 = dlugosc(Points[0], Points[1]);
 		dlugosc23 = dlugosc(Points[1], Points[2]);
 		dlugosc31 = dlugosc(Points[0], Points[2]);
+		SetBeforePoints();
 	}
 
 	void Draw( wxDC *dc,int w, int h, int alfa, int beta);
@@ -127,7 +141,19 @@ public:
 	bool isCursorInShape(wxPoint mousePoints);
 	void setSrodek();
 	void AddToPoint(int x, int y);
-
+	wxPoint * GetTmpPoints() { return tmpPoints; }
+	void SetBeforePoints()
+	{ 
+		beforePoints[0] = Points[0]; 
+		beforePoints[1] = Points[1]; 
+		beforePoints[2] = Points[2]; 
+	}
+	void SetTmpPoints()
+	{
+		Points[0] = beforePoints[0];
+		Points[1] = beforePoints[1];
+		Points[2] = beforePoints[2];
+	}
 protected:
 	/**
 	* <value> Bazowe punkty wierzcholkowe trojkata <\value>
@@ -138,7 +164,10 @@ protected:
 	* <value> Wierzcholki trojkata po transformacji <\value>
 	*/
 	wxPoint tmpPoints[3];
-
+	/**
+	* <value> Wierzcholki trojkata przed przesuwaniem <\value>
+	*/
+	wxPoint beforePoints[3];
 	/**
 	* Kolejne dlugosci bokow trojkata
 	*/
@@ -168,12 +197,28 @@ public:
 		Points[3] = wxPoint(x4, y4);
 		setSrodek();
 		dlugoscBoku = dlugosc(Points[0], Points[1]);
+		SetBeforePoints();
 	}
 	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4);
 	bool isCursorInShape(wxPoint mousePoints);
 	void setSrodek();
 	void AddToPoint(int x, int y);
+	wxPoint * GetTmpPoints() { return tmpPoints; }
+	void SetBeforePoints()
+	{
+		beforePoints[0] = Points[0];
+		beforePoints[1] = Points[1];
+		beforePoints[2] = Points[2];
+		beforePoints[3] = Points[3];
+	}
+	void SetTmpPoints()
+	{
+		Points[0] = beforePoints[0];
+		Points[1] = beforePoints[1];
+		Points[2] = beforePoints[2];
+		Points[3] = beforePoints[3];
+	}
 protected:
 	/** 
 	* <values> Punkty wierzcholkowe kwadratu <\values>
@@ -184,7 +229,10 @@ protected:
 	* <values> Wierzcholki kwadratu po transformacji <\values>
 	*/
 	wxPoint tmpPoints[4];
-
+	/**
+	* <value> Wierzcholki trojkata przed przesuwaniem <\value>
+	*/
+	wxPoint beforePoints[4];
 	/**
 	* <value> dlugosc boku kwadratu <\value>
 	*/
@@ -217,7 +265,7 @@ public:
 		setSrodek();
 		dlugoscPodstawa = dlugosc(Points[0], Points[1]);
 		dlugoscRamie = dlugosc(Points[1], Points[2]);
-
+		SetBeforePoints();
 	}
 
 	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
@@ -226,6 +274,21 @@ public:
 	void setSrodek();
 	void AddToPoint(int x, int y);
 	Matrix Symetria(); // przeslania tylko dla rownolegloboku bo jego os symetrii to tylko OY !!!!!!!!!!!!!!!!!!!!!!!!
+	wxPoint * GetTmpPoints() { return tmpPoints; }
+	void SetBeforePoints()
+	{
+		beforePoints[0] = Points[0];
+		beforePoints[1] = Points[1];
+		beforePoints[2] = Points[2];
+		beforePoints[3] = Points[3];
+	}
+	void SetTmpPoints()
+	{
+		Points[0] = beforePoints[0];
+		Points[1] = beforePoints[1];
+		Points[2] = beforePoints[2];
+		Points[3] = beforePoints[3];
+	}
 protected:
 	/**
 	* <value> Punkty wierzcholkowe rownolegloboku </value>
@@ -236,7 +299,10 @@ protected:
 	* <value> Punkty wierzcholkowe rownolegloboku po transformacji </value>
 	*/
 	wxPoint tmpPoints[4];
-
+	/**
+	* <value> Wierzcholki trojkata przed przesuwaniem <\value>
+	*/
+	wxPoint beforePoints[4];
 	/**
 	* <value> Dlugosci bokow rownolegloboku </value>
 	*/
