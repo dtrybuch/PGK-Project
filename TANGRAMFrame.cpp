@@ -240,9 +240,9 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 
 void TANGRAMFrame::symetriaButtonClick(wxCommandEvent& event)
 {
-	// TODO: Implement symetriaButtonClick
+	if(which->isSymetriaClicking) which->isSymetriaClicking = false;
+	else which->isSymetriaClicking = true;
 }
-
 
 
 void TANGRAMFrame::KeyEvent(wxKeyEvent& event)
@@ -304,6 +304,7 @@ void TANGRAMFrame::Draw()
 	else bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa, bigTriangle2.m_beta);
 	
 	which->Draw(&dc, w, h, which->m_alfa + obrotLewo->GetThumbPosition(), which->m_beta + obrotPrawo->GetThumbPosition());
+
 	//endediting 24.05
 
 	if (ksztaltImage.IsOk())

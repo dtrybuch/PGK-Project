@@ -52,6 +52,14 @@ Matrix Element::Set_Translate()
 	translate.data[1][2] = srodekY;
 	return translate;
 }
+Matrix Element::Symetria()
+{
+	Matrix symetria;
+	symetria.data[0][0] = -1;
+	symetria.data[1][1] = -1;
+	symetria.data[2][2] = 1;
+	return symetria;
+}
 
 /////////////////////////////////////////////////////
 // Klasa Triangle
@@ -60,7 +68,8 @@ Matrix Element::Set_Translate()
 void Triangle::Draw(wxDC *dc,int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa,w,h)*Set_ReturnTranslate();
+	if (isSymetriaClicking) transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Symetria()*Set_ReturnTranslate();
+	else transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa,w,h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -89,10 +98,6 @@ void Triangle::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3)
 	Points[2] = wxPoint(x3, y3);
 }
 
-void Triangle:: Symetria()
-{
-
-}
 
 bool Triangle::isCursorInShape(wxPoint mousePoints)
 {
@@ -130,7 +135,8 @@ void Triangle::AddToPoint(int x, int y)
 void Square::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
+	if (isSymetriaClicking) transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Symetria()*Set_ReturnTranslate();
+	else transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -164,11 +170,6 @@ void Square::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, i
 	Points[3] = wxPoint(x4, y4);
 }
 
-void Square::Symetria()
-{
-	
-
-}
 bool Square::isCursorInShape(wxPoint mousePoints)
 {
 	double alfa = 0;
@@ -208,7 +209,8 @@ void Square::AddToPoint(int x, int y)
 void Parallelogram::Draw(wxDC *dc, int w, int h, int alfa, int beta)
 {
 	Matrix transformation;
-	transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
+	if (isSymetriaClicking) transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Symetria()*Set_ReturnTranslate();
+	else transformation = Set_Translate() *RightRotate(beta, w, h)* LeftRotate(alfa, w, h)*Set_ReturnTranslate();
 	Vector first;
 	first.Set(Points[0].x, Points[0].y);
 	first = transformation * first;
@@ -245,10 +247,6 @@ void Parallelogram::SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, in
 
 }
 
-void Parallelogram::Symetria()
-{
-
-}
 
 bool Parallelogram::isCursorInShape(wxPoint mousePoints)
 {
@@ -280,4 +278,13 @@ void Parallelogram::AddToPoint(int x, int y)
 	Points[2].y += y;
 	Points[3].x += x;
 	Points[3].y += y;
+}
+
+Matrix Parallelogram::Symetria()
+{
+	Matrix symetria;
+	symetria.data[0][0] = -1;
+	symetria.data[1][1] = 1;
+	symetria.data[2][2] = 1;
+	return symetria;
 }

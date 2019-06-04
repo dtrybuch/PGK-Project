@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <wx/dcclient.h>
 #include <wx/colourdata.h>
 #include <wx/colordlg.h>
@@ -12,7 +12,7 @@ double dlugosc(wxPoint pierwszy, wxPoint drugi);
 class Element{
 public:
 	/**
-	* <summary> Metoda Draw, pozwalaj�ca na narysowanie elementu na obiekcie 'dc' </summary>
+	* <summary> Metoda Draw, pozwalaj¹ca na narysowanie elementu na obiekcie 'dc' </summary>
 	* <param name = "w"> szerokosc obiektu? </param>
 	* <param name = "h"> wysokosc obiektu? <\param>
 	* <param name = "alfa"> Obrot w lewo, w stopniach <\param>
@@ -49,10 +49,10 @@ public:
 	virtual bool isCursorInShape(wxPoint mousePoints) = 0;
 	
 	/**
-	* <summary> Metoda Symetria, przeksztalcajaca aktualna figure 
-	* do postaci symetrucznej wzgledem osi OY <\summary>
+	* <summary> Metoda Symetria, obliczajaca macierz symetrii
+	* <\summary>
 	*/
-	virtual void Symetria() = 0;
+	Matrix Symetria();
 
 	/**
 	* <summary> Metoda setSrodek, wyznaczajaca polozenie srodka figury <\summary>
@@ -78,7 +78,11 @@ public:
 	* <\value> 
 	*/
 	bool isClicking = false;
-	
+	/** <value>
+	* Czy przycisk symetria został naciśniety?
+	* <\value>
+	*/
+	bool isSymetriaClicking = false;
 	// <value> Wartosc X srodka figury <\value>
 	int srodekX;
 	// <value> Wartosc Y srodka figury <\value>
@@ -120,7 +124,6 @@ public:
 
 	void Draw( wxDC *dc,int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3);
-	void Symetria();
 	bool isCursorInShape(wxPoint mousePoints);
 	void setSrodek();
 	void AddToPoint(int x, int y);
@@ -169,7 +172,6 @@ public:
 	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4);
 	bool isCursorInShape(wxPoint mousePoints);
-	void Symetria();
 	void setSrodek();
 	void AddToPoint(int x, int y);
 protected:
@@ -221,10 +223,9 @@ public:
 	void Draw(wxDC *dc, int w, int h, int alfa, int beta);
 	void SetPoints(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4);
 	bool isCursorInShape(wxPoint mousePoints);
-	void Symetria();
 	void setSrodek();
 	void AddToPoint(int x, int y);
-
+	Matrix Symetria(); // przeslania tylko dla rownolegloboku bo jego os symetrii to tylko OY !!!!!!!!!!!!!!!!!!!!!!!!
 protected:
 	/**
 	* <value> Punkty wierzcholkowe rownolegloboku </value>
