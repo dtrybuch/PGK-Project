@@ -331,3 +331,6 @@ ASALocalRun/
 
 # Additional
 *.vscxproj*
+*.vcxproj.filters
+*.vcxproj
+*.vcxproj.user
