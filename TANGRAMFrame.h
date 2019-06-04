@@ -43,6 +43,8 @@ protected:
 	void stopnie235Button(wxCommandEvent& event);
 	void stopnie270Button(wxCommandEvent& event);
 	void stopnie315Button(wxCommandEvent& event);
+	void makeStartSquare();
+
 public:
 	/** Constructor */
 	TANGRAMFrame(wxWindow* parent);

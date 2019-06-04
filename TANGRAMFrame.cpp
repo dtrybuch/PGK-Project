@@ -8,19 +8,11 @@ TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 	//square(125, 150, 125, 200, 175, 200, 175, 150), 
 	//parallelogram(150,140,250,140,360,400)
 {
-	int wlk_pol = 100; //odleglosc od srodka (wielkosc tangramu)
-	int srodekX = (menu->GetSize().GetWidth() / 2) + 1;
-	int srodekY = (menu->GetSize().GetHeight() / 2) + 1;
 	menuWidth = menu->GetSize().x;
 	menuHeight = menu->GetSize().y;
 
-	bigTriangle1 = Triangle(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY, srodekX - wlk_pol, srodekY + wlk_pol);
-	bigTriangle2 = Triangle(srodekX - wlk_pol, srodekY + wlk_pol, srodekX, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
-	middleTriangle = Triangle(srodekX, srodekY - wlk_pol, srodekX + wlk_pol, srodekY - 100, srodekX + wlk_pol, srodekY);
-	smallTriangle1 = Triangle(srodekX - wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX, srodekY);
-	smallTriangle2 = Triangle(srodekX + wlk_pol / 2, srodekY + wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
-	square = Square(srodekX, srodekY, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol / 2, srodekY + wlk_pol / 2);
-	parallelogram = Parallelogram(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY - wlk_pol, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2);
+	makeStartSquare();
+
 	//end editing
 	which = &bigTriangle1;
 	obrotLewo->SetRange(360);
@@ -339,10 +331,7 @@ void TANGRAMFrame::obrotLewoUpdate(wxScrollEvent& event)
 
 void TANGRAMFrame::cleanButtonClick(wxCommandEvent& event)
 {
-	wxClientDC dc1(menu);
-	wxBufferedDC dc(&dc1);
-	dc.Clear();
-	Draw();
+	makeStartSquare();
 }
 
 void TANGRAMFrame::startButtonClick(wxCommandEvent& event)
@@ -498,4 +487,19 @@ void TANGRAMFrame::stopnie315Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(315);
 	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
+}
+
+void TANGRAMFrame::makeStartSquare()
+{
+	int wlk_pol = 100; //odleglosc od srodka (wielkosc tangramu)
+	int srodekX = (menu->GetSize().GetWidth() / 2) + 1;
+	int srodekY = (menu->GetSize().GetHeight() / 2) + 1;
+
+	bigTriangle1 = Triangle(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY, srodekX - wlk_pol, srodekY + wlk_pol);
+	bigTriangle2 = Triangle(srodekX - wlk_pol, srodekY + wlk_pol, srodekX, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
+	middleTriangle = Triangle(srodekX, srodekY - wlk_pol, srodekX + wlk_pol, srodekY - 100, srodekX + wlk_pol, srodekY);
+	smallTriangle1 = Triangle(srodekX - wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX, srodekY);
+	smallTriangle2 = Triangle(srodekX + wlk_pol / 2, srodekY + wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
+	square = Square(srodekX, srodekY, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol / 2, srodekY + wlk_pol / 2);
+	parallelogram = Parallelogram(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY - wlk_pol, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2);
 }
