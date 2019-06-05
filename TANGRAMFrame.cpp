@@ -475,7 +475,7 @@ void TANGRAMFrame::stopnie180Button(wxCommandEvent& event)
 	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 }
 
-void TANGRAMFrame::stopnie235Button(wxCommandEvent& event)
+void TANGRAMFrame::stopnie225Button(wxCommandEvent& event)
 {
 	obrotPrawo->SetThumbPosition(225);
 	staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));

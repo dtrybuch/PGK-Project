@@ -75,7 +75,7 @@ protected:
 	virtual void stopnie90Button(wxCommandEvent& event) { event.Skip(); }
 	virtual void stopnie135Button(wxCommandEvent& event) { event.Skip(); }
 	virtual void stopnie180Button(wxCommandEvent& event) { event.Skip(); }
-	virtual void stopnie235Button(wxCommandEvent& event) { event.Skip(); }
+	virtual void stopnie225Button(wxCommandEvent& event) { event.Skip(); }
 	virtual void stopnie270Button(wxCommandEvent& event) { event.Skip(); }
 	virtual void stopnie315Button(wxCommandEvent& event) { event.Skip(); }
 
