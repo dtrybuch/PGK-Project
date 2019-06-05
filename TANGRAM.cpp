@@ -56,6 +56,8 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	clean = new wxButton(this, wxID_ANY, wxT("Clean"), wxDefaultPosition, wxDefaultSize, 0);
 	bSizer11->Add(clean, 0, wxALIGN_CENTER | wxALL, 5);
 
+	zmienKolorButton = new wxButton(this, wxID_ANY, wxT("Zmien kolor"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizer11->Add(zmienKolorButton, 0, wxALL, 5);
 
 	bSizer91->Add(bSizer11, 0, wxALIGN_CENTER, 5);
 
@@ -155,7 +157,6 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	obrotPrawo->Connect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Connect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Connect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
-	obrotLewo->Connect(wxEVT_CHAR, wxKeyEventHandler(Frame::KeyEvent), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_TOP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_BOTTOM, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_LINEUP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
@@ -165,6 +166,7 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	obrotLewo->Connect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Connect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
+	zmienKolorButton->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::zmienKolorButtonClick), NULL, this);
 	clean->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::cleanButtonClick), NULL, this);
 	start->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::startButtonClick), NULL, this);
 	stopnie45->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie45Button), NULL, this);
@@ -192,7 +194,6 @@ Frame::~Frame()
 	obrotPrawo->Disconnect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Disconnect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
 	obrotPrawo->Disconnect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotPrawoUpdate), NULL, this);
-	obrotLewo->Disconnect(wxEVT_CHAR, wxKeyEventHandler(Frame::KeyEvent), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_TOP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_BOTTOM, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_LINEUP, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
@@ -202,6 +203,7 @@ Frame::~Frame()
 	obrotLewo->Disconnect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
 	obrotLewo->Disconnect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(Frame::obrotLewoUpdate), NULL, this);
+	zmienKolorButton->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::zmienKolorButtonClick), NULL, this);
 	clean->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::cleanButtonClick), NULL, this);
 	start->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Frame::startButtonClick), NULL, this);
 	stopnie45->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(Frame::stopnie45Button), NULL, this);

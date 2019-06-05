@@ -45,6 +45,7 @@ protected:
 	wxScrollBar* obrotLewo;
 	wxStaticText* staticTextObrotPrawoWartosc;
 	wxButton* clean;
+	wxButton* zmienKolorButton;
 	wxStaticText* instrukcja1;
 	wxStaticText* instrukcja2;
 	wxStaticText* instrukcja3;
@@ -66,10 +67,10 @@ protected:
 	virtual void MouseMotion(wxMouseEvent& event) { event.Skip(); }
 	virtual void symetriaButtonClick(wxCommandEvent& event) { event.Skip(); }
 	virtual void obrotPrawoUpdate(wxScrollEvent& event) { event.Skip(); }
-	virtual void KeyEvent(wxKeyEvent& event) { event.Skip(); }
 	virtual void obrotLewoUpdate(wxScrollEvent& event) { event.Skip(); }
 	virtual void cleanButtonClick(wxCommandEvent& event) { event.Skip(); }
 	virtual void startButtonClick(wxCommandEvent& event) { event.Skip(); }
+	virtual void zmienKolorButtonClick(wxCommandEvent& event) { event.Skip(); }
 	virtual void UpdateUI(wxUpdateUIEvent& event) { event.Skip(); }
 	virtual void stopnie45Button(wxCommandEvent& event) { event.Skip(); }
 	virtual void stopnie90Button(wxCommandEvent& event) { event.Skip(); }

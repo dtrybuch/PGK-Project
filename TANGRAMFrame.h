@@ -30,10 +30,10 @@ protected:
 	void MouseMotion(wxMouseEvent& event);
 	void symetriaButtonClick(wxCommandEvent& event);
 	void obrotPrawoUpdate(wxScrollEvent& event);
-	void KeyEvent(wxKeyEvent& event);
 	void obrotLewoUpdate(wxScrollEvent& event);
 	void cleanButtonClick(wxCommandEvent& event);
 	void startButtonClick(wxCommandEvent& event);
+	void zmienKolorButtonClick(wxCommandEvent& event);
 	void UpdateUI(wxUpdateUIEvent& event);
 	void losowanie();
 	void stopnie45Button(wxCommandEvent& event);
@@ -50,7 +50,6 @@ public:
 	TANGRAMFrame(wxWindow* parent);
 	//// end generated class members
 
-	void DrawFish(wxDC *dc, int w, int h);
 	void Draw();
 	wxImage ksztaltImage;
 	int wylosowana;
@@ -70,6 +69,7 @@ protected:
 	int menuWidth;//poprzednia szerokosc okna
 	int menuHeight;//poprzednia dlugosc okna
 	bool isStartButtonClicked = false;
+	bool isBlackColour = false;
 	double licznik = 0;
 	//end editing
 
