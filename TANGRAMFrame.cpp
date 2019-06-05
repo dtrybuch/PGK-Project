@@ -336,6 +336,8 @@ void TANGRAMFrame::cleanButtonClick(wxCommandEvent& event)
 
 void TANGRAMFrame::startButtonClick(wxCommandEvent& event)
 {
+	licznik = 0;
+	isStartButtonClicked = true;
 	losowanie();
 }
 
@@ -367,15 +369,17 @@ void TANGRAMFrame::Draw()
 	which->Draw(&dc, w, h, which->m_alfa + obrotLewo->GetThumbPosition(), which->m_beta + obrotPrawo->GetThumbPosition());
 		//endediting 24.05
 
-		if (ksztaltImage.IsOk())
-		{
-			ksztaltImage.Rescale(ksztalt->GetSize().GetWidth(), ksztalt->GetSize().GetHeight());
-			wxBitmap bitmap(ksztaltImage);
-			wxClientDC dc3(ksztalt);
-			wxBufferedDC dc2(&dc3);
-			dc2.Clear();
-			dc2.DrawBitmap(bitmap, 0, 0);
-		}
+	if (ksztaltImage.IsOk())
+	{
+		ksztaltImage.Rescale(ksztalt->GetSize().GetWidth(), ksztalt->GetSize().GetHeight());
+		wxBitmap bitmap(ksztaltImage);
+		wxClientDC dc3(ksztalt);
+		wxBufferedDC dc2(&dc3);
+		dc2.Clear();
+		dc2.DrawBitmap(bitmap, 0, 0);
+	}
+	if (isStartButtonClicked) Rozszczepienie(&dc);
+
 	menuWidth = menu->GetSize().x;
 	menuHeight = menu->GetSize().y;
 }
@@ -393,6 +397,7 @@ void TANGRAMFrame::UpdateUI(wxUpdateUIEvent& event)
 	square.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
 	parallelogram.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
 	Draw();
+	if( licznik > 360 ) isStartButtonClicked = false;
 }
 
 void TANGRAMFrame::DrawFish(wxDC *dc, int w, int h)
@@ -504,4 +509,40 @@ void TANGRAMFrame::makeStartSquare()
 	which = &bigTriangle1;
 	obrotLewo->SetThumbPosition(0);
 	obrotPrawo->SetThumbPosition(0);
+}
+void TANGRAMFrame::Rozszczepienie(wxBufferedDC dc)
+{
+	if (licznik == 0) makeStartSquare();
+	int w, h;
+	//dc.Clear();
+	this->Refresh();
+	menu->GetSize(&w, &h);
+	licznik += 1;
+	smallTriangle1.AddToPoint(licznik / 130,  licznik / 140 );
+	smallTriangle1.setSrodek();
+	smallTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
+
+	smallTriangle2.AddToPoint(licznik / 150, 0);
+	smallTriangle2.setSrodek();
+	smallTriangle2.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
+
+	bigTriangle2.AddToPoint(0, licznik / 170);
+	bigTriangle2.setSrodek();
+	bigTriangle2.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
+
+	bigTriangle1.AddToPoint(-licznik / 140, licznik / 170);
+	bigTriangle1.setSrodek();
+	bigTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
+
+	middleTriangle.AddToPoint(-licznik / 112, -licznik / 170);
+	middleTriangle.setSrodek();
+	middleTriangle.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
+
+	square.AddToPoint(licznik / 140, -licznik / 150);
+	square.setSrodek();
+	square.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
+
+	parallelogram.AddToPoint(0, -licznik / 170);
+	parallelogram.setSrodek();
+	parallelogram.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 }

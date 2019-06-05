@@ -55,6 +55,7 @@ public:
 	wxImage ksztaltImage;
 	int wylosowana;
 	Element * which;//ktory element jest nacisniety
+	void Rozszczepienie(wxBufferedDC dc);
 protected:
 
 	//edited 21.05
@@ -68,6 +69,8 @@ protected:
 	wxPoint firstMousePosition;
 	int menuWidth;//poprzednia szerokosc okna
 	int menuHeight;//poprzednia dlugosc okna
+	bool isStartButtonClicked = false;
+	double licznik = 0;
 	//end editing
 
 };
