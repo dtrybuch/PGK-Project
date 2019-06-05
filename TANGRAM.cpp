@@ -67,23 +67,23 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	wxBoxSizer* bSizer101;
 	bSizer101 = new wxBoxSizer(wxVERTICAL);
 
-	instrukcja1 = new wxStaticText(this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0);
+	instrukcja1 = new wxStaticText(this, wxID_ANY, wxT("Celem gry jest"), wxDefaultPosition, wxDefaultSize, 0);
 	instrukcja1->Wrap(-1);
 	bSizer101->Add(instrukcja1, 0, wxALIGN_CENTER | wxALL, 5);
 
-	instrukcja2 = new wxStaticText(this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0);
+	instrukcja2 = new wxStaticText(this, wxID_ANY, wxT("ulozenie ponizszej"), wxDefaultPosition, wxDefaultSize, 0);
 	instrukcja2->Wrap(-1);
 	bSizer101->Add(instrukcja2, 0, wxALIGN_CENTER | wxALL, 5);
 
-	instrukcja3 = new wxStaticText(this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0);
+	instrukcja3 = new wxStaticText(this, wxID_ANY, wxT("figury za pomoca"), wxDefaultPosition, wxDefaultSize, 0);
 	instrukcja3->Wrap(-1);
 	bSizer101->Add(instrukcja3, 0, wxALIGN_CENTER | wxALL, 5);
 
-	instrukcja4 = new wxStaticText(this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0);
+	instrukcja4 = new wxStaticText(this, wxID_ANY, wxT("kart znajdujacych"), wxDefaultPosition, wxDefaultSize, 0);
 	instrukcja4->Wrap(-1);
 	bSizer101->Add(instrukcja4, 0, wxALIGN_CENTER | wxALL, 5);
 
-	instrukcja5 = new wxStaticText(this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0);
+	instrukcja5 = new wxStaticText(this, wxID_ANY, wxT("sie w polu obok."), wxDefaultPosition, wxDefaultSize, 0);
 	instrukcja5->Wrap(-1);
 	bSizer101->Add(instrukcja5, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -97,7 +97,7 @@ Frame::Frame(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoi
 	wxBoxSizer* bSizer92;
 	bSizer92 = new wxBoxSizer(wxVERTICAL);
 
-	wybierzKat = new wxStaticText(this, wxID_ANY, wxT("Wybierz kąt:"), wxDefaultPosition, wxDefaultSize, 0);
+	wybierzKat = new wxStaticText(this, wxID_ANY, wxT("Wybierz kat:"), wxDefaultPosition, wxDefaultSize, 0);
 	wybierzKat->Wrap(-1);
 	bSizer92->Add(wybierzKat, 0, wxALL, 5);
 
