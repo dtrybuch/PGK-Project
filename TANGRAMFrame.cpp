@@ -12,7 +12,8 @@ TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 	menuHeight = menu->GetSize().y;
 	which = &bigTriangle1;
 	makeStartSquare();
-
+	this->m_minWidth = 1000;
+	this->m_minHeight = 700;
 	//end editing
 	
 	obrotLewo->SetRange(360);
@@ -366,7 +367,7 @@ void TANGRAMFrame::Draw()
 	if (bigTriangle2.isClicking) bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa + obrotLewo->GetThumbPosition(), bigTriangle2.m_beta + obrotPrawo->GetThumbPosition());
 	else bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa, bigTriangle2.m_beta);
 
-	which->Draw(&dc, w, h, which->m_alfa + obrotLewo->GetThumbPosition(), which->m_beta + obrotPrawo->GetThumbPosition());
+	if (which->isClicking)which->Draw(&dc, w, h, which->m_alfa + obrotLewo->GetThumbPosition(), which->m_beta + obrotPrawo->GetThumbPosition());
 		//endediting 24.05
 
 	if (ksztaltImage.IsOk())
@@ -514,7 +515,7 @@ void TANGRAMFrame::Rozszczepienie(wxBufferedDC dc)
 {
 	if (licznik == 0) makeStartSquare();
 	int w, h;
-	//dc.Clear();
+	dc.Clear();
 	this->Refresh();
 	menu->GetSize(&w, &h);
 	licznik += 1;
