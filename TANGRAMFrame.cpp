@@ -10,11 +10,11 @@ TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 {
 	menuWidth = menu->GetSize().x;
 	menuHeight = menu->GetSize().y;
-
+	which = &bigTriangle1;
 	makeStartSquare();
 
 	//end editing
-	which = &bigTriangle1;
+	
 	obrotLewo->SetRange(360);
 	obrotLewo->SetThumbPosition(0);
 	obrotPrawo->SetRange(360);
@@ -365,7 +365,6 @@ void TANGRAMFrame::Draw()
 	else bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa, bigTriangle2.m_beta);
 
 	which->Draw(&dc, w, h, which->m_alfa + obrotLewo->GetThumbPosition(), which->m_beta + obrotPrawo->GetThumbPosition());
-	if (which)
 		//endediting 24.05
 
 		if (ksztaltImage.IsOk())
@@ -502,4 +501,7 @@ void TANGRAMFrame::makeStartSquare()
 	smallTriangle2 = Triangle(srodekX + wlk_pol / 2, srodekY + wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
 	square = Square(srodekX, srodekY, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol / 2, srodekY + wlk_pol / 2);
 	parallelogram = Parallelogram(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY - wlk_pol, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2);
+	which = &bigTriangle1;
+	obrotLewo->SetThumbPosition(0);
+	obrotPrawo->SetThumbPosition(0);
 }
