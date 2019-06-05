@@ -518,32 +518,32 @@ void TANGRAMFrame::Rozszczepienie(wxBufferedDC dc)
 	dc.Clear();
 	this->Refresh();
 	menu->GetSize(&w, &h);
-	licznik += 1;
-	smallTriangle1.AddToPoint(licznik / 130,  licznik / 140 );
+	licznik += 2;
+	smallTriangle1.AddToPoint(1.75*licznik / 130,  1.7*licznik / 140 );
 	smallTriangle1.setSrodek();
 	smallTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 
-	smallTriangle2.AddToPoint(licznik / 150, 0);
+	smallTriangle2.AddToPoint(1.75*licznik / 150, 0);
 	smallTriangle2.setSrodek();
 	smallTriangle2.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 
-	bigTriangle2.AddToPoint(0, licznik / 170);
+	bigTriangle2.AddToPoint(0, 1.5*licznik / 170);
 	bigTriangle2.setSrodek();
 	bigTriangle2.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 
-	bigTriangle1.AddToPoint(-licznik / 140, licznik / 170);
+	bigTriangle1.AddToPoint(1.65*-licznik / 140, 1.5 * licznik / 170);
 	bigTriangle1.setSrodek();
 	bigTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 
-	middleTriangle.AddToPoint(-licznik / 112, -licznik / 170);
+	middleTriangle.AddToPoint(1.65*-licznik / 112,1.5* -licznik / 170);
 	middleTriangle.setSrodek();
 	middleTriangle.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 
-	square.AddToPoint(licznik / 140, -licznik / 150);
+	square.AddToPoint(1.65*licznik / 140, 1.6*-licznik / 150);
 	square.setSrodek();
 	square.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 
-	parallelogram.AddToPoint(0, -licznik / 170);
+	parallelogram.AddToPoint(0, 1.5*-licznik / 170);
 	parallelogram.setSrodek();
 	parallelogram.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 }
