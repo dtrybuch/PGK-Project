@@ -74,7 +74,6 @@ public:
 	* Czy ten obiekt sie porusza?
 	* <\value>
 	*/
-
 	bool isMoving = false;
 	/** <value>
 	* Ustawia poczatkowe punkty biorac pod uwage tmpPoints

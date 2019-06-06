@@ -1,16 +1,17 @@
 #include "TANGRAMFrame.h"
+#include <iostream>
 
 //edited 21.05
 TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 	Frame(parent)
-	//,bigTriangle1(250, 250, 125, 140, 2, 150), bigTriangle2(250, 250, 125, 140, 2, 150), middleTriangle(250, 250, 125, 140, 2, 150),
+	//,bigTriangle1(250, 250, 125, 140, 2, 150), bigTriangle2(250, 250, 125, 140, 2, 150), _middleTriangle(250, 250, 125, 140, 2, 150),
 	//smallTriangle1(250, 250, 125, 140, 2, 150), smallTriangle2(250, 250, 125, 140, 2, 150),
 	//square(125, 150, 125, 200, 175, 200, 175, 150), 
 	//parallelogram(150,140,250,140,360,400)
 {
 	menuWidth = menu->GetSize().x;
 	menuHeight = menu->GetSize().y;
-	which = &bigTriangle1;
+	_which = &bigTriangle1;
 	makeStartSquare();
 	this->m_minWidth = 1000;
 	this->m_minHeight = 700;
@@ -25,125 +26,125 @@ TANGRAMFrame::TANGRAMFrame(wxWindow* parent) :
 }
 void TANGRAMFrame::MouseClick(wxMouseEvent& event)
 {
-	which->SetBeforePoints();
+	_which->SetBeforePoints();
 	firstMousePosition.x = wxGetMousePosition().x - this->GetScreenPosition().x - 14;
 	firstMousePosition.y = wxGetMousePosition().y - this->GetScreenPosition().y - 44;
 	//edited 27.05
 	wxPoint mousePoints{ wxGetMousePosition().x - this->GetScreenPosition().x - 14, wxGetMousePosition().y - this->GetScreenPosition().y - 44 };
 	if (bigTriangle1.isCursorInShape(mousePoints))
 	{
-		if (which != &bigTriangle1)
+		if (_which != &bigTriangle1)
 		{
-			which->m_alfa += obrotLewo->GetThumbPosition();
-			which->m_beta += obrotPrawo->GetThumbPosition();
+			_which->m_alfa += obrotLewo->GetThumbPosition();
+			_which->m_beta += obrotPrawo->GetThumbPosition();
 			obrotLewo->SetThumbPosition(0);
 			obrotPrawo->SetThumbPosition(0);
 			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 		}
-		which->isClicking = false;
-		which = &bigTriangle1;
-		which->isClicking = true;
+		_which->isClicking = false;
+		_which = &bigTriangle1;
+		_which->isClicking = true;
 	}
 	else if (bigTriangle2.isCursorInShape(mousePoints))
 	{
-		if (which != &bigTriangle2)
+		if (_which != &bigTriangle2)
 		{
-			which->m_alfa += obrotLewo->GetThumbPosition();
-			which->m_beta += obrotPrawo->GetThumbPosition();
+			_which->m_alfa += obrotLewo->GetThumbPosition();
+			_which->m_beta += obrotPrawo->GetThumbPosition();
 			obrotLewo->SetThumbPosition(0);
 			obrotPrawo->SetThumbPosition(0);
 			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 		}
-		which->isClicking = false;
-		which = &bigTriangle2;
-		which->isClicking = true;
+		_which->isClicking = false;
+		_which = &bigTriangle2;
+		_which->isClicking = true;
 	}
-	else if (middleTriangle.isCursorInShape(mousePoints))
+	else if (_middleTriangle.isCursorInShape(mousePoints))
 	{
-		if (which != &middleTriangle)
+		if (_which != &_middleTriangle)
 		{
-			which->m_alfa += obrotLewo->GetThumbPosition();
-			which->m_beta += obrotPrawo->GetThumbPosition();
+			_which->m_alfa += obrotLewo->GetThumbPosition();
+			_which->m_beta += obrotPrawo->GetThumbPosition();
 			obrotLewo->SetThumbPosition(0);
 			obrotPrawo->SetThumbPosition(0);
 			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 		}
-		which->isClicking = false;
-		which = &middleTriangle;
-		which->isClicking = true;
+		_which->isClicking = false;
+		_which = &_middleTriangle;
+		_which->isClicking = true;
 	}
 	else if (smallTriangle1.isCursorInShape(mousePoints))
 	{
-		if (which != &smallTriangle1)
+		if (_which != &smallTriangle1)
 		{
-			which->m_alfa += obrotLewo->GetThumbPosition();
-			which->m_beta += obrotPrawo->GetThumbPosition();
+			_which->m_alfa += obrotLewo->GetThumbPosition();
+			_which->m_beta += obrotPrawo->GetThumbPosition();
 			obrotLewo->SetThumbPosition(0);
 			obrotPrawo->SetThumbPosition(0);
 			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 		}
-		which->isClicking = false;
-		which = &smallTriangle1;
-		which->isClicking = true;
+		_which->isClicking = false;
+		_which = &smallTriangle1;
+		_which->isClicking = true;
 	}
 	else if (smallTriangle2.isCursorInShape(mousePoints))
 	{
-		if (which != &smallTriangle2)
+		if (_which != &smallTriangle2)
 		{
-			which->m_alfa += obrotLewo->GetThumbPosition();
-			which->m_beta += obrotPrawo->GetThumbPosition();
+			_which->m_alfa += obrotLewo->GetThumbPosition();
+			_which->m_beta += obrotPrawo->GetThumbPosition();
 			obrotLewo->SetThumbPosition(0);
 			obrotPrawo->SetThumbPosition(0);
 			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 		}
-		which->isClicking = false;
-		which = &smallTriangle2;
-		which->isClicking = true;
+		_which->isClicking = false;
+		_which = &smallTriangle2;
+		_which->isClicking = true;
 	}
 	else if (square.isCursorInShape(mousePoints))
 	{
-		if (which != &square)
+		if (_which != &square)
 		{
-			which->m_alfa += obrotLewo->GetThumbPosition();
-			which->m_beta += obrotPrawo->GetThumbPosition();
+			_which->m_alfa += obrotLewo->GetThumbPosition();
+			_which->m_beta += obrotPrawo->GetThumbPosition();
 			obrotLewo->SetThumbPosition(0);
 			obrotPrawo->SetThumbPosition(0);
 			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 		}
-		which->isClicking = false;
-		which = &square;
-		which->isClicking = true;
+		_which->isClicking = false;
+		_which = &square;
+		_which->isClicking = true;
 	}
 	else if (parallelogram.isCursorInShape(mousePoints))
 	{
-		if (which != &parallelogram)
+		if (_which != &parallelogram)
 		{
-			which->m_alfa += obrotLewo->GetThumbPosition();
-			which->m_beta += obrotPrawo->GetThumbPosition();
+			_which->m_alfa += obrotLewo->GetThumbPosition();
+			_which->m_beta += obrotPrawo->GetThumbPosition();
 			obrotLewo->SetThumbPosition(0);
 			obrotPrawo->SetThumbPosition(0);
 			staticTextObrotPrawoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotPrawo->GetThumbPosition()));
 			staticTextObrotLewoWartosc->SetLabel(wxString::Format(wxT("%d"), obrotLewo->GetThumbPosition()));
 		}
-		which->isClicking = false;
-		which = &parallelogram;
-		which->isClicking = true;
+		_which->isClicking = false;
+		_which = &parallelogram;
+		_which->isClicking = true;
 	}
 	//endediting 27.05
 
 }
 void TANGRAMFrame::MouseUp(wxMouseEvent& event)
 {
-	which->isMoving = false;
+	_which->isMoving = false;
 	//24.05
-	which->m_alfa += obrotLewo->GetThumbPosition();
-	which->m_beta += obrotPrawo->GetThumbPosition();
+	_which->m_alfa += obrotLewo->GetThumbPosition();
+	_which->m_beta += obrotPrawo->GetThumbPosition();
 	//end24.05
 	obrotLewo->SetThumbPosition(0);
 	obrotPrawo->SetThumbPosition(0);
@@ -154,7 +155,7 @@ void TANGRAMFrame::MouseUp(wxMouseEvent& event)
 		smallTriangle2.isCursorInShape(smallTriangle1.GetTmpPoints()[0]) || smallTriangle2.isCursorInShape(smallTriangle1.GetTmpPoints()[1]) || smallTriangle2.isCursorInShape(smallTriangle1.GetTmpPoints()[2]) ||
 		bigTriangle1.isCursorInShape(smallTriangle1.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(smallTriangle1.GetTmpPoints()[1]) || bigTriangle1.isCursorInShape(smallTriangle1.GetTmpPoints()[2]) ||
 		bigTriangle2.isCursorInShape(smallTriangle1.GetTmpPoints()[0]) || bigTriangle2.isCursorInShape(smallTriangle1.GetTmpPoints()[1]) || bigTriangle2.isCursorInShape(smallTriangle1.GetTmpPoints()[2]) ||
-		middleTriangle.isCursorInShape(smallTriangle1.GetTmpPoints()[0]) || middleTriangle.isCursorInShape(smallTriangle1.GetTmpPoints()[1]) || middleTriangle.isCursorInShape(smallTriangle1.GetTmpPoints()[2]) ||
+		_middleTriangle.isCursorInShape(smallTriangle1.GetTmpPoints()[0]) || _middleTriangle.isCursorInShape(smallTriangle1.GetTmpPoints()[1]) || _middleTriangle.isCursorInShape(smallTriangle1.GetTmpPoints()[2]) ||
 		parallelogram.isCursorInShape(smallTriangle1.GetTmpPoints()[0]) || parallelogram.isCursorInShape(smallTriangle1.GetTmpPoints()[1]) || parallelogram.isCursorInShape(smallTriangle1.GetTmpPoints()[2]))
 	{
 		smallTriangle1.SetTmpPoints();
@@ -164,7 +165,7 @@ void TANGRAMFrame::MouseUp(wxMouseEvent& event)
 		smallTriangle1.isCursorInShape(smallTriangle2.GetTmpPoints()[0]) || smallTriangle1.isCursorInShape(smallTriangle2.GetTmpPoints()[1]) || smallTriangle1.isCursorInShape(smallTriangle2.GetTmpPoints()[2]) ||
 		bigTriangle1.isCursorInShape(smallTriangle2.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(smallTriangle2.GetTmpPoints()[1]) || bigTriangle1.isCursorInShape(smallTriangle2.GetTmpPoints()[2]) ||
 		bigTriangle2.isCursorInShape(smallTriangle2.GetTmpPoints()[0]) || bigTriangle2.isCursorInShape(smallTriangle2.GetTmpPoints()[1]) || bigTriangle2.isCursorInShape(smallTriangle2.GetTmpPoints()[2]) ||
-		middleTriangle.isCursorInShape(smallTriangle2.GetTmpPoints()[0]) || middleTriangle.isCursorInShape(smallTriangle2.GetTmpPoints()[1]) || middleTriangle.isCursorInShape(smallTriangle2.GetTmpPoints()[2]) ||
+		_middleTriangle.isCursorInShape(smallTriangle2.GetTmpPoints()[0]) || _middleTriangle.isCursorInShape(smallTriangle2.GetTmpPoints()[1]) || _middleTriangle.isCursorInShape(smallTriangle2.GetTmpPoints()[2]) ||
 		parallelogram.isCursorInShape(smallTriangle2.GetTmpPoints()[0]) || parallelogram.isCursorInShape(smallTriangle2.GetTmpPoints()[1]) || parallelogram.isCursorInShape(smallTriangle2.GetTmpPoints()[2]))
 		 {
 			smallTriangle2.SetTmpPoints();
@@ -174,7 +175,7 @@ void TANGRAMFrame::MouseUp(wxMouseEvent& event)
 		smallTriangle2.isCursorInShape(bigTriangle1.GetTmpPoints()[0]) || smallTriangle2.isCursorInShape(bigTriangle1.GetTmpPoints()[1]) || smallTriangle2.isCursorInShape(bigTriangle1.GetTmpPoints()[2]) ||
 		smallTriangle1.isCursorInShape(bigTriangle1.GetTmpPoints()[0]) || smallTriangle1.isCursorInShape(bigTriangle1.GetTmpPoints()[1]) || smallTriangle1.isCursorInShape(bigTriangle1.GetTmpPoints()[2]) ||
 		bigTriangle2.isCursorInShape(bigTriangle1.GetTmpPoints()[0]) || bigTriangle2.isCursorInShape(bigTriangle1.GetTmpPoints()[1]) || bigTriangle2.isCursorInShape(bigTriangle1.GetTmpPoints()[2]) ||
-		middleTriangle.isCursorInShape(bigTriangle1.GetTmpPoints()[0]) || middleTriangle.isCursorInShape(bigTriangle1.GetTmpPoints()[1]) || middleTriangle.isCursorInShape(bigTriangle1.GetTmpPoints()[2]) ||
+		_middleTriangle.isCursorInShape(bigTriangle1.GetTmpPoints()[0]) || _middleTriangle.isCursorInShape(bigTriangle1.GetTmpPoints()[1]) || _middleTriangle.isCursorInShape(bigTriangle1.GetTmpPoints()[2]) ||
 		parallelogram.isCursorInShape(bigTriangle1.GetTmpPoints()[0]) || parallelogram.isCursorInShape(bigTriangle1.GetTmpPoints()[1]) || parallelogram.isCursorInShape(bigTriangle1.GetTmpPoints()[2]))
 	     {
 			bigTriangle1.SetTmpPoints();
@@ -184,23 +185,23 @@ void TANGRAMFrame::MouseUp(wxMouseEvent& event)
 		smallTriangle2.isCursorInShape(bigTriangle2.GetTmpPoints()[0]) || smallTriangle2.isCursorInShape(bigTriangle2.GetTmpPoints()[1]) || smallTriangle2.isCursorInShape(bigTriangle2.GetTmpPoints()[2]) ||
 		smallTriangle1.isCursorInShape(bigTriangle2.GetTmpPoints()[0]) || smallTriangle1.isCursorInShape(bigTriangle2.GetTmpPoints()[1]) || smallTriangle1.isCursorInShape(bigTriangle2.GetTmpPoints()[2]) ||
 		bigTriangle1.isCursorInShape(bigTriangle2.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(bigTriangle2.GetTmpPoints()[1]) || bigTriangle1.isCursorInShape(bigTriangle2.GetTmpPoints()[2]) ||
-		middleTriangle.isCursorInShape(bigTriangle2.GetTmpPoints()[0]) || middleTriangle.isCursorInShape(bigTriangle2.GetTmpPoints()[1]) || middleTriangle.isCursorInShape(bigTriangle2.GetTmpPoints()[2]) ||
+		_middleTriangle.isCursorInShape(bigTriangle2.GetTmpPoints()[0]) || _middleTriangle.isCursorInShape(bigTriangle2.GetTmpPoints()[1]) || _middleTriangle.isCursorInShape(bigTriangle2.GetTmpPoints()[2]) ||
 		parallelogram.isCursorInShape(bigTriangle2.GetTmpPoints()[0]) || parallelogram.isCursorInShape(bigTriangle2.GetTmpPoints()[1]) || parallelogram.isCursorInShape(bigTriangle2.GetTmpPoints()[2]))
 		 {
 			bigTriangle2.SetTmpPoints();
 			bigTriangle2.setSrodek();
 		 }
-	else if (square.isCursorInShape(middleTriangle.GetTmpPoints()[0]) || square.isCursorInShape(middleTriangle.GetTmpPoints()[1]) || square.isCursorInShape(middleTriangle.GetTmpPoints()[2]) ||
-		smallTriangle2.isCursorInShape(middleTriangle.GetTmpPoints()[0]) || smallTriangle2.isCursorInShape(middleTriangle.GetTmpPoints()[1]) || smallTriangle2.isCursorInShape(middleTriangle.GetTmpPoints()[2]) ||
-		smallTriangle1.isCursorInShape(middleTriangle.GetTmpPoints()[0]) || smallTriangle1.isCursorInShape(middleTriangle.GetTmpPoints()[1]) || smallTriangle1.isCursorInShape(middleTriangle.GetTmpPoints()[2]) ||
-		bigTriangle1.isCursorInShape(middleTriangle.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(middleTriangle.GetTmpPoints()[1]) || bigTriangle1.isCursorInShape(middleTriangle.GetTmpPoints()[2]) ||
-		bigTriangle2.isCursorInShape(middleTriangle.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(middleTriangle.GetTmpPoints()[1]) || bigTriangle2.isCursorInShape(middleTriangle.GetTmpPoints()[2]) ||
-		parallelogram.isCursorInShape(middleTriangle.GetTmpPoints()[0]) || parallelogram.isCursorInShape(middleTriangle.GetTmpPoints()[1]) || parallelogram.isCursorInShape(middleTriangle.GetTmpPoints()[2]))
+	else if (square.isCursorInShape(_middleTriangle.GetTmpPoints()[0]) || square.isCursorInShape(_middleTriangle.GetTmpPoints()[1]) || square.isCursorInShape(_middleTriangle.GetTmpPoints()[2]) ||
+		smallTriangle2.isCursorInShape(_middleTriangle.GetTmpPoints()[0]) || smallTriangle2.isCursorInShape(_middleTriangle.GetTmpPoints()[1]) || smallTriangle2.isCursorInShape(_middleTriangle.GetTmpPoints()[2]) ||
+		smallTriangle1.isCursorInShape(_middleTriangle.GetTmpPoints()[0]) || smallTriangle1.isCursorInShape(_middleTriangle.GetTmpPoints()[1]) || smallTriangle1.isCursorInShape(_middleTriangle.GetTmpPoints()[2]) ||
+		bigTriangle1.isCursorInShape(_middleTriangle.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(_middleTriangle.GetTmpPoints()[1]) || bigTriangle1.isCursorInShape(_middleTriangle.GetTmpPoints()[2]) ||
+		bigTriangle2.isCursorInShape(_middleTriangle.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(_middleTriangle.GetTmpPoints()[1]) || bigTriangle2.isCursorInShape(_middleTriangle.GetTmpPoints()[2]) ||
+		parallelogram.isCursorInShape(_middleTriangle.GetTmpPoints()[0]) || parallelogram.isCursorInShape(_middleTriangle.GetTmpPoints()[1]) || parallelogram.isCursorInShape(_middleTriangle.GetTmpPoints()[2]))
 	     {
-			middleTriangle.SetTmpPoints();
-			middleTriangle.setSrodek();
+			_middleTriangle.SetTmpPoints();
+			_middleTriangle.setSrodek();
 	     }
-	else if (middleTriangle.isCursorInShape(square.GetTmpPoints()[0]) || middleTriangle.isCursorInShape(square.GetTmpPoints()[1]) || middleTriangle.isCursorInShape(square.GetTmpPoints()[2]) || middleTriangle.isCursorInShape(square.GetTmpPoints()[3]) ||
+	else if (_middleTriangle.isCursorInShape(square.GetTmpPoints()[0]) || _middleTriangle.isCursorInShape(square.GetTmpPoints()[1]) || _middleTriangle.isCursorInShape(square.GetTmpPoints()[2]) || _middleTriangle.isCursorInShape(square.GetTmpPoints()[3]) ||
 		smallTriangle2.isCursorInShape(square.GetTmpPoints()[0]) || smallTriangle2.isCursorInShape(square.GetTmpPoints()[1]) || smallTriangle2.isCursorInShape(square.GetTmpPoints()[2]) || smallTriangle2.isCursorInShape(square.GetTmpPoints()[3]) ||
 		smallTriangle1.isCursorInShape(square.GetTmpPoints()[0]) || smallTriangle1.isCursorInShape(square.GetTmpPoints()[1]) || smallTriangle1.isCursorInShape(square.GetTmpPoints()[2]) || smallTriangle1.isCursorInShape(square.GetTmpPoints()[3]) ||
 		bigTriangle1.isCursorInShape(square.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(square.GetTmpPoints()[1]) || bigTriangle1.isCursorInShape(square.GetTmpPoints()[2]) || bigTriangle1.isCursorInShape(square.GetTmpPoints()[3]) ||
@@ -210,7 +211,7 @@ void TANGRAMFrame::MouseUp(wxMouseEvent& event)
 			square.SetTmpPoints();
 			square.setSrodek();
 		 }
-	else if (middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[0]) || middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[1]) || middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[2]) || middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[3]) ||
+	else if (_middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[0]) || _middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[1]) || _middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[2]) || _middleTriangle.isCursorInShape(parallelogram.GetTmpPoints()[3]) ||
 		smallTriangle2.isCursorInShape(parallelogram.GetTmpPoints()[0]) || smallTriangle2.isCursorInShape(parallelogram.GetTmpPoints()[1]) || smallTriangle2.isCursorInShape(parallelogram.GetTmpPoints()[2]) || smallTriangle2.isCursorInShape(parallelogram.GetTmpPoints()[3]) ||
 		smallTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[0]) || smallTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[1]) || smallTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[2]) || smallTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[3]) ||
 		bigTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[0]) || bigTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[1]) || bigTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[2]) || bigTriangle1.isCursorInShape(parallelogram.GetTmpPoints()[3]) ||
@@ -236,66 +237,38 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 
 	if ((bigTriangle1.isCursorInShape(mousePoints) && bigTriangle1.isClicking || bigTriangle1.isMoving) && wxGetMouseState().LeftDown())
 	{
-		bigTriangle1.AddToPoint(mouseX, mouseY);
-		bigTriangle1.setSrodek();
-		which->isMoving = false;
-		bigTriangle1.isMoving = true;
-		which = &bigTriangle1;
+		moveShape(mouseX, mouseY, bigTriangle1);
 	}
 	else if ((bigTriangle2.isCursorInShape(mousePoints) && bigTriangle2.isClicking || bigTriangle2.isMoving) && wxGetMouseState().LeftDown())
 	{
-		bigTriangle2.AddToPoint(mouseX, mouseY);
-		bigTriangle2.setSrodek();
-		which->isMoving = false;
-		bigTriangle2.isMoving = true;
-		which = &bigTriangle2;
+		moveShape(mouseX, mouseY, bigTriangle2);
 	}
-	else if ((middleTriangle.isCursorInShape(mousePoints) && middleTriangle.isClicking || middleTriangle.isMoving) && wxGetMouseState().LeftDown())
+	else if ((_middleTriangle.isCursorInShape(mousePoints) && _middleTriangle.isClicking || _middleTriangle.isMoving) && wxGetMouseState().LeftDown())
 	{
-		middleTriangle.AddToPoint(mouseX, mouseY);
-		middleTriangle.setSrodek();
-		which->isMoving = false;
-		middleTriangle.isMoving = true;
-		which = &middleTriangle;
+		moveShape(mouseX, mouseY, _middleTriangle);
 	}
 	else if ((smallTriangle1.isCursorInShape(mousePoints) && smallTriangle1.isClicking || smallTriangle1.isMoving) && wxGetMouseState().LeftDown())
 	{
-		smallTriangle1.AddToPoint(mouseX, mouseY);
-		smallTriangle1.setSrodek();
-		which->isMoving = false;
-		smallTriangle1.isMoving = true;
-		which = &smallTriangle1;
+		moveShape(mouseX, mouseY, smallTriangle1);
 	}
 	else if ((smallTriangle2.isCursorInShape(mousePoints) && smallTriangle2.isClicking || smallTriangle2.isMoving) && wxGetMouseState().LeftDown())
 	{
-		smallTriangle2.AddToPoint(mouseX, mouseY);
-		smallTriangle2.setSrodek();
-		which->isMoving = false;
-		smallTriangle2.isMoving = true;
-		which = &smallTriangle2;
+		moveShape(mouseX, mouseY, smallTriangle2);
 	}
 	else if ((square.isCursorInShape(mousePoints) && square.isClicking || square.isMoving) && wxGetMouseState().LeftDown())
 	{
-		square.AddToPoint(mouseX, mouseY);
-		square.setSrodek();
-		which->isMoving = false;
-		square.isMoving = true;
-		which = &square;
+		moveShape(mouseX, mouseY, square);
 	}
 	else if ((parallelogram.isCursorInShape(mousePoints) && parallelogram.isClicking || parallelogram.isMoving) && wxGetMouseState().LeftDown())
 	{
-		parallelogram.AddToPoint(mouseX, mouseY);
-		parallelogram.setSrodek();
-		which->isMoving = false;
-		parallelogram.isMoving = true;
-		which = &parallelogram;
+		moveShape(mouseX, mouseY, parallelogram);
 	}
 	if (wxGetMousePosition().x - this->GetScreenPosition().x - 14 > menu->GetSize().x || wxGetMousePosition().x - this->GetScreenPosition().x - 14 < 0 || wxGetMousePosition().y - this->GetScreenPosition().y - 44 > menu->GetSize().y || wxGetMousePosition().y - this->GetScreenPosition().y - 44 < 0)
 	{
-		which->isMoving = false;
+		_which->isMoving = false;
 		//24.05
-		which->m_alfa += obrotLewo->GetThumbPosition();
-		which->m_beta += obrotPrawo->GetThumbPosition();
+		_which->m_alfa += obrotLewo->GetThumbPosition();
+		_which->m_beta += obrotPrawo->GetThumbPosition();
 		//end24.05
 	}
 
@@ -304,8 +277,8 @@ void TANGRAMFrame::MouseMotion(wxMouseEvent& event)
 
 void TANGRAMFrame::symetriaButtonClick(wxCommandEvent& event)
 {
-	if (which->isSymetriaClicking) which->isSymetriaClicking = false;
-	else which->isSymetriaClicking = true;
+	if (_which->isSymetriaClicking) _which->isSymetriaClicking = false;
+	else _which->isSymetriaClicking = true;
 }
 
 void TANGRAMFrame::obrotPrawoUpdate(wxScrollEvent& event)
@@ -364,14 +337,14 @@ void TANGRAMFrame::Draw()
 	else square.Draw(&dc, w, h, square.m_alfa, square.m_beta);
 	if (parallelogram.isClicking)parallelogram.Draw(&dc, w, h, parallelogram.m_alfa + obrotLewo->GetThumbPosition(), parallelogram.m_beta + obrotPrawo->GetThumbPosition());
 	else parallelogram.Draw(&dc, w, h, parallelogram.m_alfa, parallelogram.m_beta);
-	if (middleTriangle.isClicking) middleTriangle.Draw(&dc, w, h, middleTriangle.m_alfa + obrotLewo->GetThumbPosition(), middleTriangle.m_beta + obrotPrawo->GetThumbPosition());
-	else  middleTriangle.Draw(&dc, w, h, middleTriangle.m_alfa, middleTriangle.m_beta);
+	if (_middleTriangle.isClicking) _middleTriangle.Draw(&dc, w, h, _middleTriangle.m_alfa + obrotLewo->GetThumbPosition(), _middleTriangle.m_beta + obrotPrawo->GetThumbPosition());
+	else  _middleTriangle.Draw(&dc, w, h, _middleTriangle.m_alfa, _middleTriangle.m_beta);
 	if (bigTriangle1.isClicking) bigTriangle1.Draw(&dc, w, h, bigTriangle1.m_alfa + obrotLewo->GetThumbPosition(), bigTriangle1.m_beta + obrotPrawo->GetThumbPosition());
 	else bigTriangle1.Draw(&dc, w, h, bigTriangle1.m_alfa, bigTriangle1.m_beta);
 	if (bigTriangle2.isClicking) bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa + obrotLewo->GetThumbPosition(), bigTriangle2.m_beta + obrotPrawo->GetThumbPosition());
 	else bigTriangle2.Draw(&dc, w, h, bigTriangle2.m_alfa, bigTriangle2.m_beta);
 
-	if (which->isClicking)which->Draw(&dc, w, h, which->m_alfa + obrotLewo->GetThumbPosition(), which->m_beta + obrotPrawo->GetThumbPosition());
+	if (_which->isClicking)_which->Draw(&dc, w, h, _which->m_alfa + obrotLewo->GetThumbPosition(), _which->m_beta + obrotPrawo->GetThumbPosition());
 		//endediting 24.05
 
 	if (ksztaltImage.IsOk())
@@ -398,7 +371,7 @@ void TANGRAMFrame::UpdateUI(wxUpdateUIEvent& event)
 	bigTriangle2.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
 	smallTriangle1.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
 	smallTriangle2.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
-	middleTriangle.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
+	_middleTriangle.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
 	square.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
 	parallelogram.AddToPoint(menu->GetSize().x / 2 - menuWidth / 2, menu->GetSize().y / 2 - menuHeight / 2);
 	Draw();
@@ -481,12 +454,12 @@ void TANGRAMFrame::makeStartSquare()
 
 	bigTriangle1 = Triangle(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY, srodekX - wlk_pol, srodekY + wlk_pol);
 	bigTriangle2 = Triangle(srodekX - wlk_pol, srodekY + wlk_pol, srodekX, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
-	middleTriangle = Triangle(srodekX, srodekY - wlk_pol, srodekX + wlk_pol, srodekY - 100, srodekX + wlk_pol, srodekY);
+	_middleTriangle = Triangle(srodekX, srodekY - wlk_pol, srodekX + wlk_pol, srodekY - 100, srodekX + wlk_pol, srodekY);
 	smallTriangle1 = Triangle(srodekX - wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX, srodekY);
 	smallTriangle2 = Triangle(srodekX + wlk_pol / 2, srodekY + wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol, srodekY + wlk_pol);
 	square = Square(srodekX, srodekY, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2, srodekX + wlk_pol, srodekY, srodekX + wlk_pol / 2, srodekY + wlk_pol / 2);
 	parallelogram = Parallelogram(srodekX - wlk_pol, srodekY - wlk_pol, srodekX, srodekY - wlk_pol, srodekX + wlk_pol / 2, srodekY - wlk_pol / 2);
-	which = &bigTriangle1;
+	_which = &bigTriangle1;
 	obrotLewo->SetThumbPosition(0);
 	obrotPrawo->SetThumbPosition(0);
 }
@@ -518,10 +491,10 @@ void TANGRAMFrame::Rozszczepienie(wxBufferedDC dc)
 	bigTriangle1.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 	bigTriangle1.SetBeforePoints();
 
-	middleTriangle.AddToPoint(1.65*-licznik / 112,1.5* -licznik / 170);
-	middleTriangle.setSrodek();
-	middleTriangle.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
-	middleTriangle.SetBeforePoints();
+	_middleTriangle.AddToPoint(1.65*-licznik / 112,1.5* -licznik / 170);
+	_middleTriangle.setSrodek();
+	_middleTriangle.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
+	_middleTriangle.SetBeforePoints();
 
 	square.AddToPoint(1.65*licznik / 140, 1.6*-licznik / 150);
 	square.setSrodek();
@@ -533,3 +506,72 @@ void TANGRAMFrame::Rozszczepienie(wxBufferedDC dc)
 	parallelogram.Draw(&dc, w, h, smallTriangle1.m_alfa + licznik, 0);
 	parallelogram.SetBeforePoints();
 }
+void TANGRAMFrame::moveShape(int mouseX, int mouseY, Element & shape)
+{
+	shape.AddToPoint(mouseX, mouseY);
+	shape.setSrodek();
+	_which->isMoving = false;
+	shape.isMoving = true;
+	_which = &shape;
+}
+//
+//
+//void TANGRAMFrame::closeWindow(wxKeyEvent &event) {
+//	if (event.GetKeyCode() == WXK_LEFT) wxWindow::Close();
+//}
+//// funkcja zmieniaj¹ca po³o¿enie elementu przez klikniêcie odpowiedniego klawisza strza³ki 
+//void TANGRAMFrame::keyMove(wxKeyEvent& event, Element &elem) {
+//
+//	if (bigTriangle1.isClicking || bigTriangle1.isMoving && event.GetKeyCode() == WXK_LEFT)
+//	{
+//		bigTriangle1.AddToPoint(10, 0);
+//		bigTriangle1.setSrodek();
+//		_which->isMoving = false;
+//		bigTriangle1.isMoving = true;
+//		_which = &bigTriangle1;
+//	}
+//
+//	//}
+//	//if (wxGetMousePosition().x - this->GetScreenPosition().x - 14 > menu->GetSize().x || wxGetMousePosition().x - this->GetScreenPosition().x - 14 < 0 || wxGetMousePosition().y - this->GetScreenPosition().y - 44 > menu->GetSize().y || wxGetMousePosition().y - this->GetScreenPosition().y - 44 < 0)
+//	//{
+//	//	_which->isMoving = false;
+//	//	//24.05
+//	//	_which->m_alfa += obrotLewo->GetThumbPosition();
+//	//	_which->m_beta += obrotPrawo->GetThumbPosition();
+//	//	//end24.05
+//	//}
+///*
+//	if (elem.isClicking || elem.isMoving) &&{
+//		switch (event.GetKeyCode())
+//		{
+//		case WXK_LEFT:
+//			elem.AddToPoint(-5, 0);
+//			elem.setSrodek();
+//			_which->isMoving = false;
+//			elem.isMoving = true;
+//			_which = &elem;
+//			break;
+//		case WXK_RIGHT:
+//			parallelogram.AddToPoint(5, 0);
+//			parallelogram.setSrodek();
+//			_which->isMoving = false;
+//			parallelogram.isMoving = true;
+//			_which = &parallelogram;
+//			break;
+//		case WXK_DOWN:
+//			parallelogram.AddToPoint(0, -5);
+//			parallelogram.setSrodek();
+//			_which->isMoving = false;
+//			parallelogram.isMoving = true;
+//			_which = &parallelogram;
+//			break;
+//		case WXK_UP:
+//			parallelogram.AddToPoint(0, 5);
+//			parallelogram.setSrodek();
+//			_which->isMoving = false;
+//			parallelogram.isMoving = true;
+//			_which = &parallelogram;
+//			break;
+//		}
+//	}*/
+//}
